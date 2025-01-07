@@ -10,3 +10,5 @@ export const auth = betterAuth({
     provider: "sqlite", // or "pg" or "mysql"
   }),
 });
+
+export type Session = typeof auth.$Infer.Session;
