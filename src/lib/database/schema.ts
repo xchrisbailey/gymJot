@@ -1,4 +1,6 @@
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { createId } from "@paralleldrive/cuid2";
+import { relations } from "drizzle-orm";
 
 export const user = sqliteTable("user", {
   id: text().primaryKey(),
@@ -53,3 +55,88 @@ export const verification = sqliteTable("verification", {
   createdAt: integer({ mode: "timestamp" }),
   updatedAt: integer({ mode: "timestamp" }),
 });
+
+export const workoutPlan = sqliteTable("workoutPlan", {
+  id: text()
+    .primaryKey()
+    .$defaultFn(() => createId()),
+});
+
+export const workoutPlanRelations = relations(workoutPlan, ({ many }) => ({
+  days: many(day),
+}));
+
+export type WorkoutPlan = typeof workoutPlan.$inferSelect;
+export type NewWorkoutPlan = typeof workoutPlan.$inferInsert;
+
+export const day = sqliteTable("day", {
+  id: text()
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  name: text({
+    enum: [
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday",
+      "saturday",
+      "sunday",
+    ],
+  }).notNull(),
+  workoutPlanId: text()
+    .notNull()
+    .references(() => workoutPlan.id),
+});
+
+export const dayRelations = relations(day, ({ one, many }) => ({
+  workoutPlan: one(workoutPlan, {
+    fields: [day.workoutPlanId],
+    references: [workoutPlan.id],
+  }),
+  dayExercises: many(dayExercise),
+}));
+
+export type Day = typeof day.$inferSelect;
+export type NewDay = typeof day.$inferInsert;
+
+export const dayExercise = sqliteTable("dayExercise", {
+  id: text()
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  sets: integer().notNull(),
+  reps: integer().notNull(),
+  exerciseId: text()
+    .notNull()
+    .references(() => exercise.id),
+  dayId: text()
+    .notNull()
+    .references(() => day.id),
+});
+
+export const dayExerciseRelations = relations(dayExercise, ({ one }) => ({
+  day: one(day, {
+    fields: [dayExercise.dayId],
+    references: [day.id],
+  }),
+  exercise: one(exercise, {
+    fields: [dayExercise.exerciseId],
+    references: [exercise.id],
+  }),
+}));
+
+export const exercise = sqliteTable("exercise", {
+  id: text()
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  name: text().notNull(),
+  description: text(),
+  url: text(),
+});
+
+export const exerciseRelations = relations(exercise, ({ many }) => ({
+  days: many(dayExercise),
+}));
+
+export type Exercise = typeof exercise.$inferSelect;
+export type NewExercise = typeof exercise.$inferInsert;
