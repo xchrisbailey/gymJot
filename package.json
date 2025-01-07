@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@better-fetch/fetch": "^1.1.12",
-    "@hookform/resolvers": "^3.9.1",
+    "@hookform/resolvers": "^3.10.0",
     "@libsql/client": "^0.14.0",
     "@radix-ui/react-label": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.1",
@@ -26,14 +26,14 @@
     "react-hook-form": "^7.54.2",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
-    "valibot": "^1.0.0-beta.10",
+    "valibot": "^1.0.0-beta.11",
     "zod": "^3.24.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@types/bun": "^1.1.14",
+    "@types/bun": "^1.1.15",
     "@types/eslint__eslintrc": "~2.1.2",
-    "@types/node": "^20",
+    "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.20",
