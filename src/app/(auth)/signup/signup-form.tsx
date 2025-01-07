@@ -1,9 +1,6 @@
 "use client";
 
-import { valibotResolver } from "@hookform/resolvers/valibot";
-import { useForm } from "react-hook-form";
-import * as v from "valibot";
-import { authClient } from "../../../lib/auth-client";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,9 +8,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../../components/ui/form";
-import { Input } from "../../../components/ui/input";
-import { Button } from "../../../components/ui/button";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
+import { valibotResolver } from "@hookform/resolvers/valibot";
+import { useForm } from "react-hook-form";
+import * as v from "valibot";
 
 const signUpSchema = v.pipe(
   v.object({
