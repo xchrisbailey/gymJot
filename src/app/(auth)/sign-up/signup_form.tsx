@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { valibotResolver } from "@hookform/resolvers/valibot";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import * as v from "valibot";
 
@@ -34,6 +35,7 @@ const signUpSchema = v.pipe(
 );
 
 export default function SignUpForm() {
+  const router = useRouter();
   const form = useForm<v.InferOutput<typeof signUpSchema>>({
     resolver: valibotResolver(signUpSchema),
     defaultValues: {
@@ -55,7 +57,7 @@ export default function SignUpForm() {
       {
         onRequest: () => {},
         onSuccess: () => {
-          console.log("logged in");
+          router.push("/");
         },
         onError: (ctx) => {
           console.log("error", ctx.error);
@@ -94,7 +96,12 @@ export default function SignUpForm() {
               <FormItem className="grow">
                 <FormLabel>First Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="your first name" required {...field} />
+                  <Input
+                    placeholder="your first name"
+                    required
+                    {...field}
+                    autoComplete="given-name"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -107,7 +114,12 @@ export default function SignUpForm() {
               <FormItem className="grow">
                 <FormLabel>Last Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="your last name" required {...field} />
+                  <Input
+                    placeholder="your last name"
+                    required
+                    {...field}
+                    autoComplete="family-name"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

@@ -12,7 +12,7 @@ export function Header() {
   return (
     <header className="flex justify-between items-center px-5 h-[60px] bg-neutral-900">
       <div className="font-mono text-2xl font-semibold tracking-wide text-pink-200 lowercase">
-        gymJot
+        gym<em>Jot</em>
       </div>
       <div>
         {session ? (
