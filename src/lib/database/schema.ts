@@ -132,6 +132,7 @@ export const exercise = sqliteTable("exercise", {
   name: text().notNull(),
   description: text(),
   url: text(),
+  category: text(),
 });
 
 export const exerciseRelations = relations(exercise, ({ many }) => ({
