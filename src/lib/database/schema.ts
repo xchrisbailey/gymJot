@@ -133,6 +133,8 @@ export const exercise = sqliteTable("exercise", {
   description: text(),
   url: text(),
   category: text(),
+  primaryMuscle: text(),
+  equipment: text(),
 });
 
 export const exerciseRelations = relations(exercise, ({ many }) => ({
