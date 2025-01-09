@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,7 +21,12 @@ import {
 import { Exercise } from "@/lib/database/schema";
 import { exerciseCategories } from "@/lib/data";
 
-export function ExerciseList({ exercises }: { exercises: Exercise[] }) {
+export function ExerciseList({
+  exercisesPromise,
+}: {
+  exercisesPromise: Promise<Exercise[]>;
+}) {
+  const exercises = use(exercisesPromise);
   const [filter, setFilter] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
 

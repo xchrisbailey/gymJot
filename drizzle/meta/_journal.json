@@ -29,6 +29,20 @@
       "when": 1736339883868,
       "tag": "0003_tranquil_master_chief",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1736411590097,
+      "tag": "0004_clean_victor_mancha",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1736412115072,
+      "tag": "0005_closed_pride",
+      "breakpoints": true
     }
   ]
 }

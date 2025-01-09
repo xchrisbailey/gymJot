@@ -12,6 +12,10 @@ export const user = sqliteTable("user", {
   updatedAt: integer({ mode: "timestamp" }).notNull(),
 });
 
+export const userRelations = relations(user, ({ one }) => ({
+  plan: one(workoutPlan),
+}));
+
 export const session = sqliteTable("session", {
   id: text().primaryKey(),
   expiresAt: integer({ mode: "timestamp" }).notNull(),
@@ -60,10 +64,18 @@ export const workoutPlan = sqliteTable("workoutPlan", {
   id: text()
     .primaryKey()
     .$defaultFn(() => createId()),
+  userId: text()
+    .notNull()
+    .unique()
+    .references(() => user.id),
 });
 
-export const workoutPlanRelations = relations(workoutPlan, ({ many }) => ({
+export const workoutPlanRelations = relations(workoutPlan, ({ many, one }) => ({
   days: many(day),
+  user: one(user, {
+    fields: [workoutPlan.userId],
+    references: [user.id],
+  }),
 }));
 
 export type WorkoutPlan = typeof workoutPlan.$inferSelect;

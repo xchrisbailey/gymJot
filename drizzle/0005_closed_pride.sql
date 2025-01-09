@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `workoutPlan_userId_unique` ON `workoutPlan` (`userId`);
