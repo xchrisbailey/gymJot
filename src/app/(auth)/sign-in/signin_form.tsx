@@ -26,8 +26,6 @@ export default function SignInForm() {
           placeholder="your email"
           type="email"
           autoComplete="email"
-          className="invalid:border-rose-600"
-          aria-invalid={state.issues?.email ? "true" : "false"}
           required
         />
         {state.issues?.email && (
@@ -41,8 +39,6 @@ export default function SignInForm() {
           placeholder="your password"
           type="password"
           autoComplete="new-password"
-          aria-invalid={state.issues?.password ? "true" : "false"}
-          className="invalid:border-rose-600"
           required
         />
         {state.issues?.password && (
