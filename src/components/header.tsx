@@ -1,14 +1,15 @@
-"use client";
-
-import { authClient } from "@/lib/auth-client";
 import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { LogInIcon, LogOutIcon } from "lucide-react";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { signOutAction } from "@/app/(auth)/_actions";
 
-export function Header() {
-  const { data: session } = authClient.useSession();
-  const router = useRouter();
+export async function Header() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
   return (
     <header className="flex justify-between items-center px-5 h-[60px] bg-neutral-900">
       <div className="font-mono text-2xl font-semibold tracking-wide text-pink-200 lowercase">
@@ -16,24 +17,15 @@ export function Header() {
       </div>
       <div>
         {session ? (
-          <Button
-            variant="destructive"
-            onClick={async () => {
-              await authClient.signOut({
-                fetchOptions: {
-                  onSuccess: () => {
-                    router.push("/");
-                  },
-                },
-              });
-            }}
-          >
-            <LogOutIcon />
-            Sign Out
-          </Button>
+          <form method="POST" action={signOutAction}>
+            <Button variant="destructive">
+              <LogOutIcon />
+              Sign Out
+            </Button>
+          </form>
         ) : (
           <Button asChild variant="secondary">
-            <Link href="/signin">
+            <Link href="/sign-in">
               <LogInIcon />
               Sign In
             </Link>
