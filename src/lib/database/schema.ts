@@ -26,7 +26,7 @@ export const session = sqliteTable("session", {
   userAgent: text(),
   userId: text()
     .notNull()
-    .references(() => user.id),
+    .references(() => user.id, { onDelete: "cascade" }),
 });
 
 export const account = sqliteTable("account", {
@@ -35,7 +35,7 @@ export const account = sqliteTable("account", {
   providerId: text().notNull(),
   userId: text()
     .notNull()
-    .references(() => user.id),
+    .references(() => user.id, { onDelete: "cascade" }),
   accessToken: text(),
   refreshToken: text(),
   idToken: text(),
@@ -67,7 +67,7 @@ export const workoutPlan = sqliteTable("workoutPlan", {
   userId: text()
     .notNull()
     .unique()
-    .references(() => user.id),
+    .references(() => user.id, { onDelete: "cascade" }),
 });
 
 export const workoutPlanRelations = relations(workoutPlan, ({ many, one }) => ({
@@ -97,8 +97,8 @@ export const day = sqliteTable(
     }).notNull(),
     workoutPlanId: text()
       .notNull()
-      .references(() => workoutPlan.id),
-    userId: text().references(() => user.id),
+      .references(() => workoutPlan.id, { onDelete: "cascade" }),
+    userId: text().references(() => user.id, { onDelete: "cascade" }),
   },
   (t) => [unique().on(t.name, t.userId)],
 );
@@ -123,13 +123,13 @@ export const dayExercise = sqliteTable("dayExercise", {
   reps: integer().notNull(),
   exerciseId: text()
     .notNull()
-    .references(() => exercise.id),
+    .references(() => exercise.id, { onDelete: "cascade" }),
   dayId: text()
     .notNull()
-    .references(() => day.id),
+    .references(() => day.id, { onDelete: "cascade" }),
   userId: text()
     .notNull()
-    .references(() => user.id),
+    .references(() => user.id, { onDelete: "cascade" }),
 });
 
 export const dayExerciseRelations = relations(dayExercise, ({ one }) => ({

@@ -71,6 +71,13 @@
       "when": 1736484701416,
       "tag": "0009_mushy_drax",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1736494812841,
+      "tag": "0010_safe_bug",
+      "breakpoints": true
     }
   ]
 }
