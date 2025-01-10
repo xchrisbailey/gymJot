@@ -1,0 +1,1 @@
+ALTER TABLE `day` ADD `userId` text REFERENCES user(id);

@@ -1,4 +1,5 @@
 import {
+  Day,
   ExerciseCategory,
   GymEquipment,
   MuscleGroup,
@@ -206,3 +207,13 @@ export const usStates: readonly { name: string; value: StateCode }[] = [
   { name: "Wisconsin", value: "WI" },
   { name: "Wyoming", value: "WY" },
 ] as const;
+
+export const daysOfWeek: Day["name"][] = [
+  "sunday",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+];

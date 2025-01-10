@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `day_name_userId_unique` ON `day` (`name`,`userId`);

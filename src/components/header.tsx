@@ -1,9 +1,10 @@
-import { Button } from "./ui/button";
-import Link from "next/link";
-import { LogInIcon, LogOutIcon } from "lucide-react";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 import { signOutAction } from "@/app/(auth)/_actions";
+import { auth } from "@/lib/auth";
+import { LogInIcon, LogOutIcon } from "lucide-react";
+import Form from "next/form";
+import { headers } from "next/headers";
+import Link from "next/link";
+import { Button } from "./ui/button";
 
 export async function Header() {
   const session = await auth.api.getSession({
@@ -17,12 +18,12 @@ export async function Header() {
       </div>
       <div>
         {session ? (
-          <form method="POST" action={signOutAction}>
+          <Form action={signOutAction}>
             <Button variant="destructive">
               <LogOutIcon />
               Sign Out
             </Button>
-          </form>
+          </Form>
         ) : (
           <Button asChild variant="secondary">
             <Link href="/sign-in">

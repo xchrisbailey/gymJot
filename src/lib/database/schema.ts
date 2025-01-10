@@ -1,4 +1,4 @@
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer, unique } from "drizzle-orm/sqlite-core";
 import { createId } from "@paralleldrive/cuid2";
 import { relations } from "drizzle-orm";
 
@@ -78,30 +78,39 @@ export const workoutPlanRelations = relations(workoutPlan, ({ many, one }) => ({
   }),
 }));
 
-export const day = sqliteTable("day", {
-  id: text()
-    .primaryKey()
-    .$defaultFn(() => createId()),
-  name: text({
-    enum: [
-      "monday",
-      "tuesday",
-      "wednesday",
-      "thursday",
-      "friday",
-      "saturday",
-      "sunday",
-    ],
-  }).notNull(),
-  workoutPlanId: text()
-    .notNull()
-    .references(() => workoutPlan.id),
-});
+export const day = sqliteTable(
+  "day",
+  {
+    id: text()
+      .primaryKey()
+      .$defaultFn(() => createId()),
+    name: text({
+      enum: [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+      ],
+    }).notNull(),
+    workoutPlanId: text()
+      .notNull()
+      .references(() => workoutPlan.id),
+    userId: text().references(() => user.id),
+  },
+  (t) => [unique().on(t.name, t.userId)],
+);
 
 export const dayRelations = relations(day, ({ one, many }) => ({
   workoutPlan: one(workoutPlan, {
     fields: [day.workoutPlanId],
     references: [workoutPlan.id],
+  }),
+  user: one(user, {
+    fields: [day.userId],
+    references: [user.id],
   }),
   dayExercises: many(dayExercise),
 }));

@@ -1,5 +1,6 @@
+import { Exercise, WorkoutPlanWithRelations } from "@/types";
 import { db } from ".";
-import { Exercise, workoutPlan, WorkoutPlan } from "./schema";
+import { workoutPlan } from "./schema";
 import { eq } from "drizzle-orm";
 
 export async function getAllExercises(): Promise<Exercise[]> {
@@ -8,8 +9,19 @@ export async function getAllExercises(): Promise<Exercise[]> {
 
 export async function getWorkoutPlan(
   userId: string,
-): Promise<WorkoutPlan | undefined> {
+): Promise<WorkoutPlanWithRelations | undefined> {
   return await db.query.workoutPlan.findFirst({
     where: eq(workoutPlan.userId, userId),
+    with: {
+      days: {
+        with: {
+          dayExercises: {
+            with: {
+              exercise: true,
+            },
+          },
+        },
+      },
+    },
   });
 }

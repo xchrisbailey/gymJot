@@ -1,4 +1,4 @@
-import { day, exercise, workoutPlan } from "./lib/database/schema";
+import { day, dayExercise, exercise, workoutPlan } from "./lib/database/schema";
 
 export type ActionState = {
   error?: string;
@@ -16,8 +16,23 @@ export type NewWorkoutPlan = typeof workoutPlan.$inferInsert;
 export type Day = typeof day.$inferSelect;
 export type NewDay = typeof day.$inferInsert;
 
+interface DayWithRelations extends Day {
+  dayExercises: DayExerciseWithRelations[];
+}
+
+export type DayExercise = typeof dayExercise.$inferSelect;
+export type NewDayExercise = typeof dayExercise.$inferInsert;
+
+export interface DayExerciseWithRelations extends DayExercise {
+  exercise: Exercise;
+}
+
 export type Exercise = typeof exercise.$inferSelect;
 export type NewExercise = typeof exercise.$inferInsert;
+
+export interface WorkoutPlanWithRelations extends WorkoutPlan {
+  days: DayWithRelations[];
+}
 
 export type ExerciseCategory =
   | "Strength Training"
