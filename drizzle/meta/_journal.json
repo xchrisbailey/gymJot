@@ -57,6 +57,20 @@
       "when": 1736480374846,
       "tag": "0007_public_shotgun",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1736484630359,
+      "tag": "0008_black_reptil",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1736484701416,
+      "tag": "0009_mushy_drax",
+      "breakpoints": true
     }
   ]
 }

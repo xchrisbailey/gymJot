@@ -55,10 +55,28 @@ export async function newWorkoutPlanAction() {
 }
 
 const addExerciseToPlanSchema = v.object({
-  dayId: v.pipe(v.string(), v.cuid2()),
-  exerciseId: v.pipe(v.string(), v.cuid2()),
-  sets: v.pipe(v.number(), v.minValue(1, "Must have at least one set")),
-  reps: v.pipe(v.number(), v.minValue(1, "Must have at least one rep")),
+  dayId: v.pipe(
+    v.string(),
+    v.nonEmpty("must select a exercise"),
+    v.cuid2("must select a exercise"),
+  ),
+  exerciseId: v.pipe(
+    v.string(),
+    v.nonEmpty("must select a exercise"),
+    v.cuid2("must select a exercise"),
+  ),
+  sets: v.pipe(
+    v.unknown(),
+    v.transform(Number),
+    v.number(),
+    v.minValue(1, "Must have at least one set"),
+  ),
+  reps: v.pipe(
+    v.unknown(),
+    v.transform(Number),
+    v.number(),
+    v.minValue(1, "Must have at least one rep"),
+  ),
 });
 
 export async function addExerciseToPlanAction(
@@ -75,16 +93,21 @@ export async function addExerciseToPlanAction(
     Object.fromEntries(formData),
   );
 
+  console.log(data.output);
+
   if (!data.success) {
+    const issues = v.flatten<typeof addExerciseToPlanSchema>(data.issues);
     return {
       success: false,
       error: "invalid input data",
+      issues: issues.nested,
     };
   }
 
   try {
     await db.insert(dayExercise).values({
       ...data.output,
+      userId: session.user.id,
     });
   } catch (err) {
     if (err instanceof Error) {

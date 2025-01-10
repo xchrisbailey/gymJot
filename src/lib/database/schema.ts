@@ -127,12 +127,19 @@ export const dayExercise = sqliteTable("dayExercise", {
   dayId: text()
     .notNull()
     .references(() => day.id),
+  userId: text()
+    .notNull()
+    .references(() => user.id),
 });
 
 export const dayExerciseRelations = relations(dayExercise, ({ one }) => ({
   day: one(day, {
     fields: [dayExercise.dayId],
     references: [day.id],
+  }),
+  user: one(user, {
+    fields: [dayExercise.userId],
+    references: [user.id],
   }),
   exercise: one(exercise, {
     fields: [dayExercise.exerciseId],

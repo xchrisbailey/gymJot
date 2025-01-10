@@ -28,7 +28,10 @@ type Props = {
   dayId: string;
 };
 
-export default function AddExerciseToPlanForm({ exercisesPromise }: Props) {
+export default function AddExerciseToPlanForm({
+  exercisesPromise,
+  dayId,
+}: Props) {
   const exercises = use(exercisesPromise);
   const [exerciseListOpen, setExerciseListOpen] = useState(false);
   const [exerciseId, setExerciseId] = useState<string>("");
@@ -39,8 +42,10 @@ export default function AddExerciseToPlanForm({ exercisesPromise }: Props) {
 
   return (
     <Form action={formAction} className="space-y-4">
+      <input type="hidden" name="dayId" value={dayId} />
       <div className="flex flex-col gap-2">
         <Label htmlFor="exerciseName">Exercise</Label>
+        <input type="hidden" name="exerciseId" value={exerciseId} />
         {exercises ? (
           <Popover open={exerciseListOpen} onOpenChange={setExerciseListOpen}>
             <PopoverTrigger asChild>
@@ -89,15 +94,36 @@ export default function AddExerciseToPlanForm({ exercisesPromise }: Props) {
             <a href="/exerces/new">start adding some</a>
           </p>
         )}
+        {state.issues?.["exerciseId"] && (
+          <p className="text-sm font-semibold text-rose-600">
+            {state.issues["exerciseId"][0]}
+          </p>
+        )}
       </div>
       <div>
         <Label htmlFor="sets">Sets</Label>
-        <Input id="sets" type="number" name="sets" required />
+        <Input id="sets" type="number" name="sets" min={1} required />
+        {state.issues?.["sets"] && (
+          <p className="text-sm font-semibold text-rose-600">
+            {state.issues["sets"][0]}
+          </p>
+        )}
       </div>
       <div>
         <Label htmlFor="reps">Reps</Label>
-        <Input id="reps" type="number" name="reps" required />
+        <Input id="reps" type="number" name="reps" min={1} required />
+        {state.issues?.["reps"] && (
+          <p className="text-sm font-semibold text-rose-600">
+            {state.issues["reps"][0]}
+          </p>
+        )}
       </div>
+
+      {state.error && (
+        <p className="my-2 text-base font-semibold text-rose-600">
+          {state.error}
+        </p>
+      )}
       <Button type="submit" disabled={pending}>
         {pending ? "Adding..." : "Add Exercise"}
       </Button>
