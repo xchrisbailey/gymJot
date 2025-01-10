@@ -80,7 +80,14 @@ export default function AddExerciseToPlanForm({
                             setExerciseListOpen(false);
                           }}
                         >
-                          <Check className={cn("mr-2 h-4 w-4")} />
+                          <Check
+                            className={cn(
+                              "mr-2 h-4 w-4",
+                              exerciseId === exercise.id
+                                ? "opacity-100"
+                                : "opacity-0",
+                            )}
+                          />
                           {exercise.name}
                         </CommandItem>
                       ))}
