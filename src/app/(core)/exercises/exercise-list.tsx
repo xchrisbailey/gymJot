@@ -18,8 +18,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Exercise } from "@/lib/database/schema";
 import { exerciseCategories } from "@/lib/data";
+import { Exercise } from "@/types";
 
 export function ExerciseList({
   exercisesPromise,

@@ -1,3 +1,5 @@
+import { day, exercise, workoutPlan } from "./lib/database/schema";
+
 export type ActionState = {
   error?: string;
   success?: string;
@@ -7,6 +9,15 @@ export type ActionState = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any; // This allows for additional properties
 };
+
+export type WorkoutPlan = typeof workoutPlan.$inferSelect;
+export type NewWorkoutPlan = typeof workoutPlan.$inferInsert;
+
+export type Day = typeof day.$inferSelect;
+export type NewDay = typeof day.$inferInsert;
+
+export type Exercise = typeof exercise.$inferSelect;
+export type NewExercise = typeof exercise.$inferInsert;
 
 export type ExerciseCategory =
   | "Strength Training"

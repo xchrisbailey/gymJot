@@ -78,9 +78,6 @@ export const workoutPlanRelations = relations(workoutPlan, ({ many, one }) => ({
   }),
 }));
 
-export type WorkoutPlan = typeof workoutPlan.$inferSelect;
-export type NewWorkoutPlan = typeof workoutPlan.$inferInsert;
-
 export const day = sqliteTable("day", {
   id: text()
     .primaryKey()
@@ -108,9 +105,6 @@ export const dayRelations = relations(day, ({ one, many }) => ({
   }),
   dayExercises: many(dayExercise),
 }));
-
-export type Day = typeof day.$inferSelect;
-export type NewDay = typeof day.$inferInsert;
 
 export const dayExercise = sqliteTable("dayExercise", {
   id: text()
@@ -152,6 +146,3 @@ export const exercise = sqliteTable("exercise", {
 export const exerciseRelations = relations(exercise, ({ many }) => ({
   days: many(dayExercise),
 }));
-
-export type Exercise = typeof exercise.$inferSelect;
-export type NewExercise = typeof exercise.$inferInsert;
