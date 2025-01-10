@@ -16,7 +16,7 @@ export type NewWorkoutPlan = typeof workoutPlan.$inferInsert;
 export type Day = typeof day.$inferSelect;
 export type NewDay = typeof day.$inferInsert;
 
-interface DayWithRelations extends Day {
+export interface DayWithRelations extends Day {
   dayExercises: DayExerciseWithRelations[];
 }
 

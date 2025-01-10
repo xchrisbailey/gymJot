@@ -1,4 +1,4 @@
-import { Exercise, WorkoutPlanWithRelations } from "@/types";
+import { DayWithRelations, Exercise, WorkoutPlanWithRelations } from "@/types";
 import { db } from ".";
 import { workoutPlan } from "./schema";
 import { eq } from "drizzle-orm";
@@ -24,4 +24,11 @@ export async function getWorkoutPlan(
       },
     },
   });
+}
+
+export async function getWorkoutPlanDay(
+  day: string,
+  userId: string,
+): Promise<DayWithRelations | undefined> {
+  return (await getWorkoutPlan(userId))?.days.find((d) => d.name === day);
 }

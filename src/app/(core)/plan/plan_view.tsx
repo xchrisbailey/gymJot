@@ -1,7 +1,6 @@
 "use client";
 
 import { use } from "react";
-import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Accordion,
@@ -9,13 +8,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { WorkoutPlanWithRelations } from "@/types";
 import { revalidatePath } from "next/cache";
 import { newWorkoutPlanAction } from "./_actions";
 import { daysOfWeek } from "@/lib/data";
+import Link from "next/link";
+import { ExerciseArticle } from "./_components/exercise_article";
 
 type Props = {
   workoutPlanPromise: Promise<WorkoutPlanWithRelations | undefined>;
@@ -23,7 +23,6 @@ type Props = {
 
 export function WorkoutPlanView({ workoutPlanPromise }: Props) {
   const workoutPlan = use(workoutPlanPromise);
-  const router = useRouter();
 
   const handleGenerateWorkoutPlan = async () => {
     await newWorkoutPlanAction(); // Replace 'user1' with actual user ID
@@ -69,62 +68,27 @@ export function WorkoutPlanView({ workoutPlanPromise }: Props) {
                 <AccordionContent>
                   {day?.dayExercises.length ? (
                     day.dayExercises.map((dayExercise, index) => (
-                      <div key={dayExercise.id}>
+                      <>
                         {index > 0 && <Separator className="my-2" />}
-                        <div className="py-2">
-                          <h3 className="font-semibold">
-                            {dayExercise.exercise.name}
-                          </h3>
-                          <p className="text-sm text-muted-foreground">
-                            {dayExercise.sets} sets of {dayExercise.reps} reps
-                          </p>
-                          {dayExercise.exercise.description && (
-                            <p className="mt-1 text-sm text-muted-foreground">
-                              {dayExercise.exercise.description}
-                            </p>
-                          )}
-                          <div className="flex flex-wrap gap-2 mt-2">
-                            {dayExercise.exercise.category && (
-                              <Badge variant="secondary">
-                                {dayExercise.exercise.category}
-                              </Badge>
-                            )}
-                            {dayExercise.exercise.primaryMuscle && (
-                              <Badge variant="outline">
-                                {dayExercise.exercise.primaryMuscle}
-                              </Badge>
-                            )}
-                            {dayExercise.exercise.equipment && (
-                              <Badge>{dayExercise.exercise.equipment}</Badge>
-                            )}
-                          </div>
-                          {dayExercise.exercise.url && (
-                            <a
-                              href={dayExercise.exercise.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="block mt-2 text-sm text-blue-500 hover:underline"
-                            >
-                              Learn more
-                            </a>
-                          )}
-                        </div>
-                      </div>
+                        <ExerciseArticle dayExercise={dayExercise} />
+                      </>
                     ))
                   ) : (
                     <div>
                       <p className="mb-2 text-muted-foreground">
                         No exercises planned for this day.
                       </p>
-                      <Button
-                        onClick={() =>
-                          router.push(`/workout-plan/add-exercise/${day?.id}`)
-                        }
-                      >
-                        Add Workout for {dayName}
-                      </Button>
                     </div>
                   )}
+                  <Button variant="outline" asChild>
+                    <Link href={`/plan/add-exercise/${day?.id}`}>
+                      Add/Edit{" "}
+                      <span style={{ textTransform: "capitalize" }}>
+                        {dayName}
+                      </span>{" "}
+                      Workout
+                    </Link>
+                  </Button>
                 </AccordionContent>
               </AccordionItem>
             );
