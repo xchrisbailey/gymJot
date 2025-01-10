@@ -34,11 +34,11 @@ export async function newExercise(prevState: ActionState, formData: FormData) {
 
   try {
     await db.insert(exercise).values(data.output);
-  } catch (error) {
-    if (error instanceof Error) {
+  } catch (err) {
+    if (err instanceof Error) {
       return {
         success: false,
-        error: error.message,
+        error: err.message,
       };
     }
 
