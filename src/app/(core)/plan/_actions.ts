@@ -5,6 +5,7 @@ import { daysOfWeek } from "@/lib/data";
 import { db } from "@/lib/database";
 import { day, dayExercise, workoutPlan } from "@/lib/database/schema";
 import { ActionState } from "@/types";
+import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -123,5 +124,35 @@ export async function addExerciseToPlanAction(
     };
   }
 
-  return redirect(`/plan/add-exercise/${data.output.dayId}`);
+  revalidatePath("/plan/edit");
+  return {
+    success: true,
+  };
+}
+
+export async function removeExerciseFromPlanAction(dayExerciseId: string) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user) return redirect("/sign-in");
+  try {
+    await db
+      .delete(dayExercise)
+      .where(
+        and(
+          eq(dayExercise.id, dayExerciseId),
+          eq(dayExercise.userId, session.user.id),
+        ),
+      );
+  } catch (err) {
+    return {
+      success: false,
+      error: err,
+    };
+  }
+  revalidatePath("/plan/edit");
+  return {
+    success: true,
+  };
 }

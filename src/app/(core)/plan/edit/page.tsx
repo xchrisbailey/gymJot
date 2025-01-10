@@ -1,8 +1,10 @@
 import { auth } from "@/lib/auth";
-import { getWorkoutPlanDay } from "@/lib/database/queries";
+import { getAllExercises, getWorkoutPlanDay } from "@/lib/database/queries";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { ExerciseArticle } from "../_components/exercise_article";
+import ExerciseToPlanForm from "../_components/exercise_to_plan_form";
+import { RemoveExerciseFromDayPlanButton } from "../_components/remove_exercise_from_plan_button";
 
 type Props = {
   searchParams: Promise<{
@@ -26,6 +28,8 @@ export default async function EditPlanPage(props: Props) {
 
   if (!session?.user) return redirect("/sign-in");
 
+  const exercisesPromise = getAllExercises();
+
   const day = (await props.searchParams).day;
   const dayPlan = await getWorkoutPlanDay(day, session.user.id);
 
@@ -38,11 +42,27 @@ export default async function EditPlanPage(props: Props) {
       </h1>
       <div className="grid grid-cols-2 gap-5 w-full">
         <div>
+          <h2>Current Exercises</h2>
           {dayPlan.dayExercises.map((dayExercise) => (
-            <ExerciseArticle dayExercise={dayExercise} key={dayExercise.id} />
+            <div key={dayExercise.id} className="flex gap-5 items-center">
+              <div className="flex-grow">
+                <ExerciseArticle dayExercise={dayExercise} />
+              </div>
+              <div className="flex-shrink">
+                <RemoveExerciseFromDayPlanButton
+                  dayExerciseId={dayExercise.id}
+                />
+              </div>
+            </div>
           ))}
         </div>
-        <div>add form</div>
+        <div>
+          <h2>Add Exercises</h2>
+          <ExerciseToPlanForm
+            exercisesPromise={exercisesPromise}
+            dayId={dayPlan.id}
+          />
+        </div>
       </div>
     </div>
   );

@@ -28,10 +28,7 @@ type Props = {
   dayId: string;
 };
 
-export default function AddExerciseToPlanForm({
-  exercisesPromise,
-  dayId,
-}: Props) {
+export default function ExerciseToPlanForm({ exercisesPromise, dayId }: Props) {
   const exercises = use(exercisesPromise);
   const [exerciseListOpen, setExerciseListOpen] = useState(false);
   const [exerciseId, setExerciseId] = useState<string>("");
