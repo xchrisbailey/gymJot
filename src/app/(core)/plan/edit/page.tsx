@@ -4,7 +4,6 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { ExerciseArticle } from "../_components/exercise_article";
 import ExerciseToPlanForm from "../_components/exercise_to_plan_form";
-import { RemoveExerciseFromDayPlanButton } from "../_components/remove_exercise_from_plan_button";
 
 type Props = {
   searchParams: Promise<{
@@ -44,19 +43,7 @@ export default async function EditPlanPage(props: Props) {
         <div>
           <h2>Current Exercises</h2>
           {dayPlan.dayExercises.map((dayExercise) => (
-            <div
-              key={dayExercise.id}
-              className="flex gap-5 items-center transition-all duration-300 ease-in-out"
-            >
-              <div className="flex-grow">
-                <ExerciseArticle dayExercise={dayExercise} />
-              </div>
-              <div className="flex-shrink">
-                <RemoveExerciseFromDayPlanButton
-                  dayExerciseId={dayExercise.id}
-                />
-              </div>
-            </div>
+            <ExerciseArticle dayExercise={dayExercise} key={dayExercise.id} />
           ))}
         </div>
         <div>
