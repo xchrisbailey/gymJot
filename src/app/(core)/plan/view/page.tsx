@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { ExerciseArticle } from "../_components/exercise_article";
 import ExerciseToPlanForm from "../_components/exercise_to_plan_form";
 import { Separator } from "@/components/ui/separator";
+import { BackButton } from "../_components/back_button";
 
 type Props = {
   searchParams: Promise<{
@@ -37,9 +38,14 @@ export default async function EditPlanPage(props: Props) {
 
   return (
     <div className="container py-8 mx-auto">
-      <h1 className="mb-5 border-b">
-        <em style={{ textTransform: "capitalize" }}>{day}</em> Plan
-      </h1>
+      <div className="flex justify-between items-center mb-5 border-b">
+        <h1>
+          <em style={{ textTransform: "capitalize" }}>{day}</em> Plan
+        </h1>
+        <div>
+          <BackButton />
+        </div>
+      </div>
       <div className="grid grid-cols-1 gap-5 w-full md:grid-cols-2">
         <div>
           <h2>Current Exercises</h2>

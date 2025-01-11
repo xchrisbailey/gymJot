@@ -55,6 +55,7 @@ export function WorkoutPlanView({ workoutPlanPromise }: Props) {
           {daysOfWeek.map((dayName) => {
             const day = workoutPlan.days.find((d) => d.name === dayName);
             if (!day) return null;
+
             return (
               <AccordionItem key={dayName} value={dayName}>
                 <AccordionTrigger className="hover:no-underline">
@@ -68,10 +69,10 @@ export function WorkoutPlanView({ workoutPlanPromise }: Props) {
                 <AccordionContent>
                   {day?.dayExercises.length ? (
                     day.dayExercises.map((dayExercise, index) => (
-                      <>
+                      <div key={`${dayExercise.dayId}_${index}`}>
                         {index > 0 && <Separator className="my-2" />}
                         <ExerciseArticle dayExercise={dayExercise} />
-                      </>
+                      </div>
                     ))
                   ) : (
                     <div>
@@ -81,8 +82,8 @@ export function WorkoutPlanView({ workoutPlanPromise }: Props) {
                     </div>
                   )}
                   <Button variant="outline" asChild>
-                    <Link href={`/plan/add-exercise/${day?.id}`}>
-                      Add/Edit{" "}
+                    <Link href={`/plan/view?day=${day.name}`}>
+                      View/Edit{" "}
                       <span style={{ textTransform: "capitalize" }}>
                         {dayName}
                       </span>{" "}

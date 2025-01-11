@@ -124,7 +124,7 @@ export async function addExerciseToPlanAction(
     };
   }
 
-  revalidatePath("/plan/edit");
+  revalidatePath("/plan/view");
   return {
     success: true,
   };
@@ -151,7 +151,7 @@ export async function removeExerciseFromPlanAction(dayExerciseId: string) {
       error: err,
     };
   }
-  revalidatePath("/plan/edit");
+  revalidatePath("/plan/view");
   return {
     success: true,
   };
