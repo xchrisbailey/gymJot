@@ -16,7 +16,7 @@ export function RemoveExerciseFromDayPlanButton({ dayExerciseId }: Props) {
   }
 
   return (
-    <Button onClick={handleDelete} variant="outline" size="icon">
+    <Button onClick={handleDelete} variant="destructive" size="icon">
       <Trash2 />
     </Button>
   );

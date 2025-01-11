@@ -44,7 +44,10 @@ export default async function EditPlanPage(props: Props) {
         <div>
           <h2>Current Exercises</h2>
           {dayPlan.dayExercises.map((dayExercise) => (
-            <div key={dayExercise.id} className="flex gap-5 items-center">
+            <div
+              key={dayExercise.id}
+              className="flex gap-5 items-center transition-all duration-300 ease-in-out"
+            >
               <div className="flex-grow">
                 <ExerciseArticle dayExercise={dayExercise} />
               </div>
