@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { ExerciseArticle } from "../_components/exercise_article";
 import ExerciseToPlanForm from "../_components/exercise_to_plan_form";
+import { Separator } from "@/components/ui/separator";
 
 type Props = {
   searchParams: Promise<{
@@ -36,16 +37,17 @@ export default async function EditPlanPage(props: Props) {
 
   return (
     <div className="container py-8 mx-auto">
-      <h1 className="mb-5">
-        <span style={{ textTransform: "capitalize" }}>{day}</span> Plan
+      <h1 className="mb-5 border-b">
+        <em style={{ textTransform: "capitalize" }}>{day}</em> Plan
       </h1>
-      <div className="grid grid-cols-2 gap-5 w-full">
+      <div className="grid grid-cols-1 gap-5 w-full md:grid-cols-2">
         <div>
           <h2>Current Exercises</h2>
           {dayPlan.dayExercises.map((dayExercise) => (
             <ExerciseArticle dayExercise={dayExercise} key={dayExercise.id} />
           ))}
         </div>
+        <Separator className="md:hidden" decorative={true} />
         <div>
           <h2>Add Exercises</h2>
           <ExerciseToPlanForm

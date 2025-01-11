@@ -9,7 +9,7 @@ type Props = {
 export function ExerciseArticle({ dayExercise }: Props) {
   return (
     <div className="overflow-hidden relative rounded-md group">
-      <article className="p-4 transition-all duration-300 ease-in-out group-hover:pr-16">
+      <article className="py-4 transition-all duration-300 ease-in-out group-hover:pr-16">
         <div className="py-2">
           <h3 className="font-semibold">{dayExercise.exercise.name}</h3>
           <p className="text-sm text-muted-foreground">
