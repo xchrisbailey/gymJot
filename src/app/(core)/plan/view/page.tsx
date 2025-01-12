@@ -38,10 +38,7 @@ export default async function EditPlanPage(props: Props) {
 
   return (
     <div className="container py-8 mx-auto">
-      <div className="flex justify-between items-center mb-5 border-b">
-        <h1>
-          <em style={{ textTransform: "capitalize" }}>{day}</em> Plan
-        </h1>
+      <div className="flex justify-end items-center mb-5">
         <div>
           <BackButton />
         </div>
