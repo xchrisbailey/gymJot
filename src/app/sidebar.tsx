@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import * as React from "react";
 
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -33,6 +32,7 @@ import Link from "next/link";
 import { signOutAction } from "./(auth)/_actions";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { Separator } from "@/components/ui/separator";
 
 export async function AppSidebar({
   ...props
@@ -105,7 +105,7 @@ export async function AppSidebar({
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
-
+        <Separator />
         <SidebarGroup>
           <SidebarMenu>
             {session?.user ? (
