@@ -1,73 +1,73 @@
-import { sqliteTable, text, integer, unique } from "drizzle-orm/sqlite-core";
-import { createId } from "@paralleldrive/cuid2";
-import { relations } from "drizzle-orm";
+import { sqliteTable, text, integer, unique } from 'drizzle-orm/sqlite-core';
+import { createId } from '@paralleldrive/cuid2';
+import { relations } from 'drizzle-orm';
 
-export const user = sqliteTable("user", {
+export const user = sqliteTable('user', {
   id: text().primaryKey(),
   name: text().notNull(),
   email: text().notNull().unique(),
-  emailVerified: integer({ mode: "boolean" }).notNull(),
+  emailVerified: integer({ mode: 'boolean' }).notNull(),
   image: text(),
-  createdAt: integer({ mode: "timestamp" }).notNull(),
-  updatedAt: integer({ mode: "timestamp" }).notNull(),
+  createdAt: integer({ mode: 'timestamp' }).notNull(),
+  updatedAt: integer({ mode: 'timestamp' }).notNull(),
 });
 
 export const userRelations = relations(user, ({ one }) => ({
   plan: one(workoutPlan),
 }));
 
-export const session = sqliteTable("session", {
+export const session = sqliteTable('session', {
   id: text().primaryKey(),
-  expiresAt: integer({ mode: "timestamp" }).notNull(),
+  expiresAt: integer({ mode: 'timestamp' }).notNull(),
   token: text().notNull().unique(),
-  createdAt: integer({ mode: "timestamp" }).notNull(),
-  updatedAt: integer({ mode: "timestamp" }).notNull(),
+  createdAt: integer({ mode: 'timestamp' }).notNull(),
+  updatedAt: integer({ mode: 'timestamp' }).notNull(),
   ipAddress: text(),
   userAgent: text(),
   userId: text()
     .notNull()
-    .references(() => user.id, { onDelete: "cascade" }),
+    .references(() => user.id, { onDelete: 'cascade' }),
 });
 
-export const account = sqliteTable("account", {
+export const account = sqliteTable('account', {
   id: text().primaryKey(),
   accountId: text().notNull(),
   providerId: text().notNull(),
   userId: text()
     .notNull()
-    .references(() => user.id, { onDelete: "cascade" }),
+    .references(() => user.id, { onDelete: 'cascade' }),
   accessToken: text(),
   refreshToken: text(),
   idToken: text(),
   accessTokenExpiresAt: integer({
-    mode: "timestamp",
+    mode: 'timestamp',
   }),
   refreshTokenExpiresAt: integer({
-    mode: "timestamp",
+    mode: 'timestamp',
   }),
   scope: text(),
   password: text(),
-  createdAt: integer({ mode: "timestamp" }).notNull(),
-  updatedAt: integer({ mode: "timestamp" }).notNull(),
+  createdAt: integer({ mode: 'timestamp' }).notNull(),
+  updatedAt: integer({ mode: 'timestamp' }).notNull(),
 });
 
-export const verification = sqliteTable("verification", {
+export const verification = sqliteTable('verification', {
   id: text().primaryKey(),
   identifier: text().notNull(),
   value: text().notNull(),
-  expiresAt: integer({ mode: "timestamp" }).notNull(),
-  createdAt: integer({ mode: "timestamp" }),
-  updatedAt: integer({ mode: "timestamp" }),
+  expiresAt: integer({ mode: 'timestamp' }).notNull(),
+  createdAt: integer({ mode: 'timestamp' }),
+  updatedAt: integer({ mode: 'timestamp' }),
 });
 
-export const workoutPlan = sqliteTable("workoutPlan", {
+export const workoutPlan = sqliteTable('workoutPlan', {
   id: text()
     .primaryKey()
     .$defaultFn(() => createId()),
   userId: text()
     .notNull()
     .unique()
-    .references(() => user.id, { onDelete: "cascade" }),
+    .references(() => user.id, { onDelete: 'cascade' }),
 });
 
 export const workoutPlanRelations = relations(workoutPlan, ({ many, one }) => ({
@@ -79,28 +79,20 @@ export const workoutPlanRelations = relations(workoutPlan, ({ many, one }) => ({
 }));
 
 export const day = sqliteTable(
-  "day",
+  'day',
   {
     id: text()
       .primaryKey()
       .$defaultFn(() => createId()),
     name: text({
-      enum: [
-        "monday",
-        "tuesday",
-        "wednesday",
-        "thursday",
-        "friday",
-        "saturday",
-        "sunday",
-      ],
+      enum: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
     }).notNull(),
     workoutPlanId: text()
       .notNull()
-      .references(() => workoutPlan.id, { onDelete: "cascade" }),
-    userId: text().references(() => user.id, { onDelete: "cascade" }),
+      .references(() => workoutPlan.id, { onDelete: 'cascade' }),
+    userId: text().references(() => user.id, { onDelete: 'cascade' }),
   },
-  (t) => [unique().on(t.name, t.userId)],
+  (t) => [unique().on(t.name, t.userId)]
 );
 
 export const dayRelations = relations(day, ({ one, many }) => ({
@@ -115,7 +107,7 @@ export const dayRelations = relations(day, ({ one, many }) => ({
   dayExercises: many(dayExercise),
 }));
 
-export const dayExercise = sqliteTable("dayExercise", {
+export const dayExercise = sqliteTable('dayExercise', {
   id: text()
     .primaryKey()
     .$defaultFn(() => createId()),
@@ -123,13 +115,13 @@ export const dayExercise = sqliteTable("dayExercise", {
   reps: integer().notNull(),
   exerciseId: text()
     .notNull()
-    .references(() => exercise.id, { onDelete: "cascade" }),
+    .references(() => exercise.id, { onDelete: 'cascade' }),
   dayId: text()
     .notNull()
-    .references(() => day.id, { onDelete: "cascade" }),
+    .references(() => day.id, { onDelete: 'cascade' }),
   userId: text()
     .notNull()
-    .references(() => user.id, { onDelete: "cascade" }),
+    .references(() => user.id, { onDelete: 'cascade' }),
 });
 
 export const dayExerciseRelations = relations(dayExercise, ({ one }) => ({
@@ -147,7 +139,7 @@ export const dayExerciseRelations = relations(dayExercise, ({ one }) => ({
   }),
 }));
 
-export const exercise = sqliteTable("exercise", {
+export const exercise = sqliteTable('exercise', {
   id: text()
     .primaryKey()
     .$defaultFn(() => createId()),

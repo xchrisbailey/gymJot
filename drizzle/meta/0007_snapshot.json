@@ -105,12 +105,8 @@
           "name": "account_userId_user_id_fk",
           "tableFrom": "account",
           "tableTo": "user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -154,10 +150,7 @@
       "indexes": {
         "day_name_userId_unique": {
           "name": "day_name_userId_unique",
-          "columns": [
-            "name",
-            "userId"
-          ],
+          "columns": ["name", "userId"],
           "isUnique": true
         }
       },
@@ -166,12 +159,8 @@
           "name": "day_workoutPlanId_workoutPlan_id_fk",
           "tableFrom": "day",
           "tableTo": "workoutPlan",
-          "columnsFrom": [
-            "workoutPlanId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["workoutPlanId"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -179,12 +168,8 @@
           "name": "day_userId_user_id_fk",
           "tableFrom": "day",
           "tableTo": "user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -238,12 +223,8 @@
           "name": "dayExercise_exerciseId_exercise_id_fk",
           "tableFrom": "dayExercise",
           "tableTo": "exercise",
-          "columnsFrom": [
-            "exerciseId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["exerciseId"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -251,12 +232,8 @@
           "name": "dayExercise_dayId_day_id_fk",
           "tableFrom": "dayExercise",
           "tableTo": "day",
-          "columnsFrom": [
-            "dayId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["dayId"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -387,9 +364,7 @@
       "indexes": {
         "session_token_unique": {
           "name": "session_token_unique",
-          "columns": [
-            "token"
-          ],
+          "columns": ["token"],
           "isUnique": true
         }
       },
@@ -398,12 +373,8 @@
           "name": "session_userId_user_id_fk",
           "tableFrom": "session",
           "tableTo": "user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -468,9 +439,7 @@
       "indexes": {
         "user_email_unique": {
           "name": "user_email_unique",
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "isUnique": true
         }
       },
@@ -552,9 +521,7 @@
       "indexes": {
         "workoutPlan_userId_unique": {
           "name": "workoutPlan_userId_unique",
-          "columns": [
-            "userId"
-          ],
+          "columns": ["userId"],
           "isUnique": true
         }
       },
@@ -563,12 +530,8 @@
           "name": "workoutPlan_userId_user_id_fk",
           "tableFrom": "workoutPlan",
           "tableTo": "user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }

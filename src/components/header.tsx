@@ -1,10 +1,10 @@
-import { signOutAction } from "@/app/(auth)/_actions";
-import { auth } from "@/lib/auth";
-import { LogInIcon, LogOutIcon } from "lucide-react";
-import Form from "next/form";
-import { headers } from "next/headers";
-import Link from "next/link";
-import { Button } from "./ui/button";
+import { signOutAction } from '@/app/(auth)/_actions';
+import { auth } from '@/lib/auth';
+import { LogInIcon, LogOutIcon } from 'lucide-react';
+import Form from 'next/form';
+import { headers } from 'next/headers';
+import Link from 'next/link';
+import { Button } from './ui/button';
 
 export async function Header() {
   const session = await auth.api.getSession({
@@ -12,8 +12,8 @@ export async function Header() {
   });
 
   return (
-    <header className="flex justify-between items-center px-5 h-[60px] bg-neutral-900">
-      <div className="font-mono text-2xl font-semibold tracking-wide text-pink-200 lowercase">
+    <header className="flex h-[60px] items-center justify-between bg-neutral-900 px-5">
+      <div className="font-mono text-2xl font-semibold lowercase tracking-wide text-pink-200">
         gym<em>Jot</em>
       </div>
       <div>

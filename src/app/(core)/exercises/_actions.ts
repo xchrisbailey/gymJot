@@ -1,12 +1,12 @@
-"use server";
+'use server';
 
-import { auth } from "@/lib/auth";
-import { db } from "@/lib/database";
-import { exercise } from "@/lib/database/schema";
-import { ActionState } from "@/types";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import * as v from "valibot";
+import { auth } from '@/lib/auth';
+import { db } from '@/lib/database';
+import { exercise } from '@/lib/database/schema';
+import { ActionState } from '@/types';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import * as v from 'valibot';
 
 const newExerciseSchema = v.object({
   name: v.pipe(v.string(), v.minLength(2)),
@@ -18,17 +18,14 @@ export async function newExercise(prevState: ActionState, formData: FormData) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  if (!session) throw new Error("Not authenticated");
+  if (!session) throw new Error('Not authenticated');
 
-  const data = await v.safeParseAsync(
-    newExerciseSchema,
-    Object.fromEntries(formData),
-  );
+  const data = await v.safeParseAsync(newExerciseSchema, Object.fromEntries(formData));
 
   if (!data.success) {
     return {
       success: false,
-      error: "invalid input data",
+      error: 'invalid input data',
     };
   }
 
@@ -44,9 +41,9 @@ export async function newExercise(prevState: ActionState, formData: FormData) {
 
     return {
       success: false,
-      error: "unknown error",
+      error: 'unknown error',
     };
   }
 
-  return redirect("/exercises");
+  return redirect('/exercises');
 }

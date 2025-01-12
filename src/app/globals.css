@@ -83,11 +83,11 @@
   }
 
   h1 {
-    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl font-mono;
+    @apply scroll-m-20 font-mono text-4xl font-extrabold tracking-tight lg:text-5xl;
   }
 
   h2 {
-    @apply scroll-m-20 font-mono pb-2 text-3xl font-semibold tracking-tight text-purple-600;
+    @apply scroll-m-20 pb-2 font-mono text-3xl font-semibold tracking-tight text-purple-600;
   }
 
   h3 {

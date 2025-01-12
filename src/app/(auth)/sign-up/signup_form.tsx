@@ -1,20 +1,13 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth-client";
-import { valibotResolver } from "@hookform/resolvers/valibot";
-import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import * as v from "valibot";
+import { Button } from '@/components/ui/button';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { authClient } from '@/lib/auth-client';
+import { valibotResolver } from '@hookform/resolvers/valibot';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import * as v from 'valibot';
 
 const signUpSchema = v.pipe(
   v.object({
@@ -26,12 +19,12 @@ const signUpSchema = v.pipe(
   }),
   v.forward(
     v.partialCheck(
-      [["password"], ["passwordConfirmation"]],
+      [['password'], ['passwordConfirmation']],
       (input) => input.password === input.passwordConfirmation,
-      "Passwords do not match",
+      'Passwords do not match'
     ),
-    ["passwordConfirmation"],
-  ),
+    ['passwordConfirmation']
+  )
 );
 
 export default function SignUpForm() {
@@ -39,11 +32,11 @@ export default function SignUpForm() {
   const form = useForm<v.InferOutput<typeof signUpSchema>>({
     resolver: valibotResolver(signUpSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      passwordConfirmation: "",
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
     },
   });
 
@@ -57,12 +50,12 @@ export default function SignUpForm() {
       {
         onRequest: () => {},
         onSuccess: () => {
-          router.push("/");
+          router.push('/');
         },
         onError: (ctx) => {
-          console.log("error", ctx.error);
+          console.log('error', ctx.error);
         },
-      },
+      }
     );
   }
 
@@ -76,19 +69,13 @@ export default function SignUpForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="your email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  {...field}
-                />
+                <Input placeholder="your email" type="email" autoComplete="email" required {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <div className="flex gap-4 w-full">
+        <div className="flex w-full gap-4">
           <FormField
             control={form.control}
             name="firstName"
@@ -96,12 +83,7 @@ export default function SignUpForm() {
               <FormItem className="grow">
                 <FormLabel>First Name</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="your first name"
-                    required
-                    {...field}
-                    autoComplete="given-name"
-                  />
+                  <Input placeholder="your first name" required {...field} autoComplete="given-name" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -114,19 +96,14 @@ export default function SignUpForm() {
               <FormItem className="grow">
                 <FormLabel>Last Name</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="your last name"
-                    required
-                    {...field}
-                    autoComplete="family-name"
-                  />
+                  <Input placeholder="your last name" required {...field} autoComplete="family-name" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>
-        <div className="flex gap-4 w-full">
+        <div className="flex w-full gap-4">
           <FormField
             control={form.control}
             name="password"
@@ -134,13 +111,7 @@ export default function SignUpForm() {
               <FormItem className="grow">
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="enter password"
-                    type="password"
-                    autoComplete="new-password"
-                    required
-                    {...field}
-                  />
+                  <Input placeholder="enter password" type="password" autoComplete="new-password" required {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

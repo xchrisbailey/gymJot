@@ -1,44 +1,27 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { ActionState, Exercise } from "@/types";
-import { Check, ChevronsUpDown } from "lucide-react";
-import Form from "next/form";
-import { use, useActionState, useState } from "react";
-import { addExerciseToPlanAction } from "../../_actions";
+import { Button } from '@/components/ui/button';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { ActionState, Exercise } from '@/types';
+import { Check, ChevronsUpDown } from 'lucide-react';
+import Form from 'next/form';
+import { use, useActionState, useState } from 'react';
+import { addExerciseToPlanAction } from '../../_actions';
 
 type Props = {
   exercisesPromise: Promise<Exercise[] | undefined>;
   dayId: string;
 };
 
-export default function AddExerciseToPlanForm({
-  exercisesPromise,
-  dayId,
-}: Props) {
+export default function AddExerciseToPlanForm({ exercisesPromise, dayId }: Props) {
   const exercises = use(exercisesPromise);
   const [exerciseListOpen, setExerciseListOpen] = useState(false);
-  const [exerciseId, setExerciseId] = useState<string>("");
-  const [state, formAction, pending] = useActionState<ActionState, FormData>(
-    addExerciseToPlanAction,
-    {},
-  );
+  const [exerciseId, setExerciseId] = useState<string>('');
+  const [state, formAction, pending] = useActionState<ActionState, FormData>(addExerciseToPlanAction, {});
 
   return (
     <Form action={formAction} className="space-y-4">
@@ -54,16 +37,13 @@ export default function AddExerciseToPlanForm({
                   variant="outline"
                   role="combobox"
                   aria-expanded={exerciseListOpen}
-                  className="justify-between w-full"
+                  className="w-full justify-between"
                 >
-                  {exerciseId
-                    ? exercises.find((exercise) => exercise.id === exerciseId)
-                        ?.name
-                    : "Select exercise..."}
-                  <ChevronsUpDown className="ml-2 w-4 h-4 opacity-50 shrink-0" />
+                  {exerciseId ? exercises.find((exercise) => exercise.id === exerciseId)?.name : 'Select exercise...'}
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="p-0 w-full">
+              <PopoverContent className="w-full p-0">
                 <Command>
                   <CommandInput placeholder="Search exercise..." />
                   <CommandList>
@@ -74,19 +54,12 @@ export default function AddExerciseToPlanForm({
                           key={exercise.id}
                           value={exercise.id}
                           onSelect={(currentValue) => {
-                            setExerciseId(
-                              currentValue === exerciseId ? "" : currentValue,
-                            );
+                            setExerciseId(currentValue === exerciseId ? '' : currentValue);
                             setExerciseListOpen(false);
                           }}
                         >
                           <Check
-                            className={cn(
-                              "mr-2 h-4 w-4",
-                              exerciseId === exercise.id
-                                ? "opacity-100"
-                                : "opacity-0",
-                            )}
+                            className={cn('mr-2 h-4 w-4', exerciseId === exercise.id ? 'opacity-100' : 'opacity-0')}
                           />
                           {exercise.name}
                         </CommandItem>
@@ -96,16 +69,14 @@ export default function AddExerciseToPlanForm({
                 </Command>
               </PopoverContent>
             </Popover>
-            {state.issues?.["exerciseId"] && (
-              <p className="text-sm font-semibold text-rose-600">
-                {state.issues["exerciseId"][0]}
-              </p>
+            {state.issues?.['exerciseId'] && (
+              <p className="text-sm font-semibold text-rose-600">{state.issues['exerciseId'][0]}</p>
             )}
           </>
         ) : (
-          <div className="py-2 px-3 bg-yellow-100 rounded">
+          <div className="rounded bg-yellow-100 px-3 py-2">
             <p>
-              no exercises in database.{" "}
+              no exercises in database.{' '}
               <a href="/exercises/new" className="underline">
                 start by adding some
               </a>
@@ -116,29 +87,19 @@ export default function AddExerciseToPlanForm({
       <div>
         <Label htmlFor="sets">Sets</Label>
         <Input id="sets" type="number" name="sets" min={1} required />
-        {state.issues?.["sets"] && (
-          <p className="text-sm font-semibold text-rose-600">
-            {state.issues["sets"][0]}
-          </p>
-        )}
+        {state.issues?.['sets'] && <p className="text-sm font-semibold text-rose-600">{state.issues['sets'][0]}</p>}
       </div>
       <div>
         <Label htmlFor="reps">Reps</Label>
         <Input id="reps" type="number" name="reps" min={1} required />
-        {state.issues?.["reps"] && (
-          <p className="text-sm font-semibold text-rose-600">
-            {state.issues["reps"][0]}
-          </p>
-        )}
+        {state.issues?.['reps'] && <p className="text-sm font-semibold text-rose-600">{state.issues['reps'][0]}</p>}
       </div>
 
       {state.error && (
-        <p className="p-2 my-2 text-base font-semibold text-rose-600 bg-rose-100 rounded">
-          {state.error}
-        </p>
+        <p className="my-2 rounded bg-rose-100 p-2 text-base font-semibold text-rose-600">{state.error}</p>
       )}
       <Button type="submit" disabled={pending}>
-        {pending ? "Adding..." : "Add Exercise"}
+        {pending ? 'Adding...' : 'Add Exercise'}
       </Button>
     </Form>
   );

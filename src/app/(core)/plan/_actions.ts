@@ -1,22 +1,22 @@
-"use server";
+'use server';
 
-import { auth } from "@/lib/auth";
-import { daysOfWeek } from "@/lib/data";
-import { db } from "@/lib/database";
-import { day, dayExercise, workoutPlan } from "@/lib/database/schema";
-import { ActionState } from "@/types";
-import { and, eq } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import * as v from "valibot";
+import { auth } from '@/lib/auth';
+import { daysOfWeek } from '@/lib/data';
+import { db } from '@/lib/database';
+import { day, dayExercise, workoutPlan } from '@/lib/database/schema';
+import { ActionState } from '@/types';
+import { and, eq } from 'drizzle-orm';
+import { revalidatePath } from 'next/cache';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import * as v from 'valibot';
 
 export async function newWorkoutPlanAction() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
-  if (!session?.user.id) return redirect("/sign-in");
+  if (!session?.user.id) return redirect('/sign-in');
 
   try {
     await db.transaction(async (tx) => {
@@ -48,51 +48,27 @@ export async function newWorkoutPlanAction() {
       throw new Error(err.message);
     }
 
-    throw new Error("An error occurred while creating a new workout plan.");
+    throw new Error('An error occurred while creating a new workout plan.');
   }
 
-  revalidatePath("/plan");
-  return redirect("/plan");
+  revalidatePath('/plan');
+  return redirect('/plan');
 }
 
 const addExerciseToPlanSchema = v.object({
-  dayId: v.pipe(
-    v.string(),
-    v.nonEmpty("must select a exercise"),
-    v.cuid2("must select a exercise"),
-  ),
-  exerciseId: v.pipe(
-    v.string(),
-    v.nonEmpty("must select a exercise"),
-    v.cuid2("must select a exercise"),
-  ),
-  sets: v.pipe(
-    v.unknown(),
-    v.transform(Number),
-    v.number(),
-    v.minValue(1, "Must have at least one set"),
-  ),
-  reps: v.pipe(
-    v.unknown(),
-    v.transform(Number),
-    v.number(),
-    v.minValue(1, "Must have at least one rep"),
-  ),
+  dayId: v.pipe(v.string(), v.nonEmpty('must select a exercise'), v.cuid2('must select a exercise')),
+  exerciseId: v.pipe(v.string(), v.nonEmpty('must select a exercise'), v.cuid2('must select a exercise')),
+  sets: v.pipe(v.unknown(), v.transform(Number), v.number(), v.minValue(1, 'Must have at least one set')),
+  reps: v.pipe(v.unknown(), v.transform(Number), v.number(), v.minValue(1, 'Must have at least one rep')),
 });
 
-export async function addExerciseToPlanAction(
-  prevState: ActionState,
-  formData: FormData,
-) {
+export async function addExerciseToPlanAction(prevState: ActionState, formData: FormData) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  if (!session) return redirect("/sign-in");
+  if (!session) return redirect('/sign-in');
 
-  const data = await v.safeParseAsync(
-    addExerciseToPlanSchema,
-    Object.fromEntries(formData),
-  );
+  const data = await v.safeParseAsync(addExerciseToPlanSchema, Object.fromEntries(formData));
 
   console.log(data.output);
 
@@ -100,7 +76,7 @@ export async function addExerciseToPlanAction(
     const issues = v.flatten<typeof addExerciseToPlanSchema>(data.issues);
     return {
       success: false,
-      error: "invalid input data",
+      error: 'invalid input data',
       issues: issues.nested,
     };
   }
@@ -120,11 +96,11 @@ export async function addExerciseToPlanAction(
 
     return {
       success: false,
-      error: "unknown error",
+      error: 'unknown error',
     };
   }
 
-  revalidatePath("/plan/view");
+  revalidatePath('/plan/view');
   return {
     success: true,
   };
@@ -135,23 +111,16 @@ export async function removeExerciseFromPlanAction(dayExerciseId: string) {
     headers: await headers(),
   });
 
-  if (!session?.user) return redirect("/sign-in");
+  if (!session?.user) return redirect('/sign-in');
   try {
-    await db
-      .delete(dayExercise)
-      .where(
-        and(
-          eq(dayExercise.id, dayExerciseId),
-          eq(dayExercise.userId, session.user.id),
-        ),
-      );
+    await db.delete(dayExercise).where(and(eq(dayExercise.id, dayExerciseId), eq(dayExercise.userId, session.user.id)));
   } catch (err) {
     return {
       success: false,
       error: err,
     };
   }
-  revalidatePath("/plan/view");
+  revalidatePath('/plan/view');
   return {
     success: true,
   };

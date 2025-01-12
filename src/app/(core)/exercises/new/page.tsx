@@ -1,4 +1,4 @@
-import NewExerciseForm from "./new_exercise_form";
+import NewExerciseForm from './new_exercise_form';
 
 export default async function NewExercisePage() {
   return (

@@ -1,42 +1,25 @@
-"use client";
+'use client';
 
-import { use, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { exerciseCategories } from "@/lib/data";
-import { Exercise } from "@/types";
+import { use, useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { exerciseCategories } from '@/lib/data';
+import { Exercise } from '@/types';
 
-export function ExerciseList({
-  exercisesPromise,
-}: {
-  exercisesPromise: Promise<Exercise[]>;
-}) {
+export function ExerciseList({ exercisesPromise }: { exercisesPromise: Promise<Exercise[]> }) {
   const exercises = use(exercisesPromise);
-  const [filter, setFilter] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [filter, setFilter] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all');
 
   const filteredExercises = exercises.filter(
     (exercise) =>
       exercise.name.toLowerCase().includes(filter.toLowerCase()) &&
-      (categoryFilter === "all" || exercise.category === categoryFilter),
+      (categoryFilter === 'all' || exercise.category === categoryFilter)
   );
 
-  const categories = ["all", ...exerciseCategories];
+  const categories = ['all', ...exerciseCategories];
 
   return (
     <div className="space-y-4">
@@ -54,7 +37,7 @@ export function ExerciseList({
           <SelectContent>
             {categories.map((category) => (
               <SelectItem key={category} value={category}>
-                {category === "all" ? "All Categories" : category}
+                {category === 'all' ? 'All Categories' : category}
               </SelectItem>
             ))}
           </SelectContent>
@@ -68,9 +51,7 @@ export function ExerciseList({
               <CardDescription>{exercise.category}</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="mb-2 text-sm text-gray-500">
-                {exercise.description}
-              </p>
+              <p className="mb-2 text-sm text-gray-500">{exercise.description}</p>
               <p className="text-sm">
                 <strong>Primary Muscle:</strong> {exercise.primaryMuscle}
               </p>
@@ -81,11 +62,7 @@ export function ExerciseList({
             {exercise.url && (
               <CardFooter>
                 <Button variant="secondary" asChild>
-                  <a
-                    href={exercise.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={exercise.url} target="_blank" rel="noopener noreferrer">
                     Watch Video
                   </a>
                 </Button>
@@ -95,9 +72,7 @@ export function ExerciseList({
         ))}
       </div>
       {filteredExercises.length === 0 && (
-        <p className="text-center text-gray-500">
-          No exercises found matching your criteria.
-        </p>
+        <p className="text-center text-gray-500">No exercises found matching your criteria.</p>
       )}
     </div>
   );
