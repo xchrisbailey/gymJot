@@ -58,10 +58,10 @@ export default function NewExerciseForm() {
         </div>
         <div className="w-full">
           <Label>
-            Muscle Group
-            <Select name="muscleGroup">
+            Primary Muscle
+            <Select name="primaryMuscle">
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="muscle group" />
+                <SelectValue placeholder="primary muscle" />
               </SelectTrigger>
               <SelectContent>
                 {muscleGroups.map((muscleGroup) => (
