@@ -3,6 +3,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { daysOfWeek } from '@/lib/data';
 import { getPlanByDay } from '@/lib/database/queries';
 import Form from 'next/form';
+import LogForm from './_components/log-form';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { AlertCircle } from 'lucide-react';
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 type Day = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
@@ -13,7 +16,11 @@ export default async function LogPage(props: { searchParams: SearchParams }) {
   if (!day || typeof day !== 'string' || !isValidDay(day.toLowerCase())) {
     return (
       <div>
-        <h1>Please select a valid day of the week</h1>
+        <Alert variant="destructive" className="mb-2">
+          <AlertCircle className="w-4 h-4" />
+          <AlertTitle>No Day Selected</AlertTitle>
+          <AlertDescription>Please select a day to start logging</AlertDescription>
+        </Alert>
         <DaySelectHeader />
       </div>
     );
@@ -22,12 +29,10 @@ export default async function LogPage(props: { searchParams: SearchParams }) {
 
   return (
     <>
-      <DaySelectHeader />
+      <DaySelectHeader day={day} />
       {dayExercises && dayExercises.length > 0 ? (
         <>
-          {dayExercises.map((e) => (
-            <div key={e.id}>{e.exercise.name}</div>
-          ))}
+          <LogForm day={day} exercises={dayExercises} />
         </>
       ) : (
         <div>
@@ -38,17 +43,17 @@ export default async function LogPage(props: { searchParams: SearchParams }) {
   );
 }
 
-function DaySelectHeader() {
+function DaySelectHeader({ day }: { day?: string }) {
   return (
     <div className="grid place-content-center w-full">
       <Form action="/log" className="flex gap-4">
-        <Select name="day">
+        <Select name="day" defaultValue={day}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select a Day" />
           </SelectTrigger>
           <SelectContent>
             {daysOfWeek.map((d) => (
-              <SelectItem value={d} key={d}>
+              <SelectItem value={d} key={d} aria-selected={day === d}>
                 <span style={{ textTransform: 'capitalize' }}>{d}</span>
               </SelectItem>
             ))}
