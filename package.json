@@ -10,7 +10,8 @@
     "format": "prettier --write .",
     "db:migrate": "drizzle-kit migrate",
     "db:generate": "drizzle-kit generate",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "node ./src/data/seed.ts"
   },
   "dependencies": {
     "@better-fetch/fetch": "^1.1.12",

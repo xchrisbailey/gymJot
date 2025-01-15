@@ -143,7 +143,7 @@ export const exercise = sqliteTable('exercise', {
   id: text()
     .primaryKey()
     .$defaultFn(() => createId()),
-  name: text().notNull(),
+  name: text().notNull().unique(),
   description: text(),
   url: text(),
   category: text(),
