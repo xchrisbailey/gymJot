@@ -226,4 +226,76 @@ export const exerciseData: Omit<Exercise, 'id'>[] = [
     primaryMuscle: 'Hip Abductors',
     equipment: 'Hip Abductor Machine',
   },
+  {
+    name: 'Seated Cable Row',
+    description:
+      'Sit at rowing machine with feet on platform, knees slightly bent. Grasp cable attachment, keep back straight, pull handle towards lower chest while squeezing shoulder blades together.',
+    url: 'https://www.youtube.com/watch?v=GZbfZ033f74',
+    category: 'Cable',
+    primaryMuscle: 'Back',
+    equipment: 'Cable Machine',
+  },
+  {
+    name: 'Machine Chest Press',
+    description:
+      'Sit on chest press machine, grasp handles at chest level. Push handles forward until arms are extended, then slowly return to starting position while maintaining control.',
+    url: 'https://www.youtube.com/watch?v=xUm0BiZCWlQ',
+    category: 'Machine',
+    primaryMuscle: 'Chest',
+    equipment: 'Chest Press Machine',
+  },
+  {
+    name: 'Dumbbell Lateral Raises',
+    description:
+      'Stand with dumbbells at sides, palms facing inward. Keep slight bend in elbows and raise arms out to sides until parallel with ground, then lower with control.',
+    url: 'https://www.youtube.com/watch?v=3VcKaXpzqRo',
+    category: 'Strength',
+    primaryMuscle: 'Shoulders',
+    equipment: 'Dumbbells',
+  },
+  {
+    name: 'Tricep Rope Pulldown',
+    description:
+      'Stand facing cable machine with rope attachment at highest position. Keeping upper arms stationary at sides, extend arms down until fully straight, then control the return.',
+    url: 'https://www.youtube.com/watch?v=vB5OHsJ3EME',
+    category: 'Cable',
+    primaryMuscle: 'Triceps',
+    equipment: 'Cable Machine',
+  },
+  {
+    name: 'Basic Crunches',
+    description:
+      'Lie on back with knees bent, feet flat on floor. Place hands behind head, engage core to lift shoulder blades off ground, then lower back down with control. Avoid pulling on head/neck.',
+    url: 'https://www.youtube.com/watch?v=5ER5Of4MOPI',
+    category: 'Core',
+    primaryMuscle: 'Abs',
+    equipment: 'None',
+  },
+  {
+    name: 'Lying Leg Raises',
+    description:
+      'Lie on back with legs straight and together. Keep legs straight while raising them up towards ceiling until hips lift slightly off ground, then lower back down with control.',
+    url: 'https://www.youtube.com/watch?v=l4kQd9eWclE',
+    category: 'Core',
+    primaryMuscle: 'Lower Abs',
+    equipment: 'None',
+  },
+  {
+    name: 'Hanging Leg Raises',
+    description:
+      'Hang from pull-up bar with straight arms. Keep legs straight and raise them until parallel to ground or higher, then lower back down with control.',
+    url: 'https://www.youtube.com/watch?v=Pr1ieGZ5atk',
+    category: 'Core',
+    primaryMuscle: 'Lower Abs',
+    equipment: 'Pull-up Bar',
+  },
+  {
+    name: 'Decline Crunches',
+    description:
+      'Lie on decline bench with feet secured. Cross arms over chest or place hands behind head, curl upper body up towards knees, then lower back with control.',
+    url: 'https://www.youtube.com/watch?v=_M2Etme-tfE',
+    category: 'Core',
+    primaryMuscle: 'Abs',
+    equipment: 'Decline Bench',
+  },
 ];

@@ -37,13 +37,13 @@ export default function ExerciseToPlanForm({ exercisesPromise, dayId }: Props) {
                   variant="outline"
                   role="combobox"
                   aria-expanded={exerciseListOpen}
-                  className="w-full justify-between"
+                  className="justify-between w-full"
                 >
                   {exerciseId ? exercises.find((exercise) => exercise.id === exerciseId)?.name : 'Select exercise...'}
-                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  <ChevronsUpDown className="ml-2 w-4 h-4 opacity-50 shrink-0" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-full p-0">
+              <PopoverContent className="p-0 w-full">
                 <Command>
                   <CommandInput placeholder="Search exercise..." />
                   <CommandList>
@@ -52,9 +52,9 @@ export default function ExerciseToPlanForm({ exercisesPromise, dayId }: Props) {
                       {exercises.map((exercise) => (
                         <CommandItem
                           key={exercise.id}
-                          value={exercise.id}
+                          value={exercise.name}
                           onSelect={(currentValue) => {
-                            setExerciseId(currentValue === exerciseId ? '' : currentValue);
+                            setExerciseId(currentValue === exercise.name ? exercise.id : '');
                             setExerciseListOpen(false);
                           }}
                         >
@@ -74,7 +74,7 @@ export default function ExerciseToPlanForm({ exercisesPromise, dayId }: Props) {
             )}
           </>
         ) : (
-          <div className="rounded bg-yellow-100 px-3 py-2">
+          <div className="py-2 px-3 bg-yellow-100 rounded">
             <p>
               no exercises in database.{' '}
               <a href="/exercises/new" className="underline">
@@ -96,7 +96,7 @@ export default function ExerciseToPlanForm({ exercisesPromise, dayId }: Props) {
       </div>
 
       {state.error && (
-        <p className="my-2 rounded bg-rose-100 p-2 text-base font-semibold text-rose-600">{state.error}</p>
+        <p className="p-2 my-2 text-base font-semibold text-rose-600 bg-rose-100 rounded">{state.error}</p>
       )}
       <Button type="submit" disabled={pending}>
         {pending ? 'Adding...' : 'Add Exercise'}
