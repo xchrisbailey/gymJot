@@ -1,11 +1,11 @@
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { daysOfWeek } from '@/lib/data';
 import { getPlanByDay } from '@/lib/database/queries';
+import { AlertCircle } from 'lucide-react';
 import Form from 'next/form';
 import LogForm from './_components/log-form';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { AlertCircle } from 'lucide-react';
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 type Day = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
