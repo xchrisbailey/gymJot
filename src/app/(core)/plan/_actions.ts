@@ -70,8 +70,6 @@ export async function addExerciseToPlanAction(prevState: ActionState, formData: 
 
   const data = await v.safeParseAsync(addExerciseToPlanSchema, Object.fromEntries(formData));
 
-  console.log(data.output);
-
   if (!data.success) {
     const issues = v.flatten<typeof addExerciseToPlanSchema>(data.issues);
     return {
@@ -115,9 +113,15 @@ export async function removeExerciseFromPlanAction(dayExerciseId: string) {
   try {
     await db.delete(dayExercise).where(and(eq(dayExercise.id, dayExerciseId), eq(dayExercise.userId, session.user.id)));
   } catch (err) {
+    if (err instanceof Error) {
+      return {
+        success: false,
+        error: err.message,
+      };
+    }
     return {
       success: false,
-      error: err,
+      error: 'an unknown error occurred',
     };
   }
   revalidatePath('/plan/view');

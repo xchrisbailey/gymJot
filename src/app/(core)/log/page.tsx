@@ -1,18 +1,28 @@
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { auth } from '@/lib/auth';
 import { daysOfWeek } from '@/lib/data';
 import { getPlanByDay } from '@/lib/database/queries';
 import { AlertCircle } from 'lucide-react';
 import Form from 'next/form';
-import LogForm from './_components/log-form';
+import { headers } from 'next/headers';
+import { unauthorized } from 'next/navigation';
+import LogFormList from './_components/log-form';
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 type Day = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
 
 export default async function LogPage(props: { searchParams: SearchParams }) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user) throw unauthorized();
+  // const logId = await createLogIfNotExists(session.user.id);
+
   const searchParams = await props.searchParams;
-  const day = searchParams.day;
+  const day = searchParams.day ?? new Date().toLocaleDateString('en-us', { weekday: 'long' });
   if (!day || typeof day !== 'string' || !isValidDay(day.toLowerCase())) {
     return (
       <div>
@@ -32,7 +42,7 @@ export default async function LogPage(props: { searchParams: SearchParams }) {
       <DaySelectHeader day={day} />
       {dayExercises && dayExercises.length > 0 ? (
         <>
-          <LogForm day={day} exercises={dayExercises} />
+          <LogFormList day={day} exercises={dayExercises} />
         </>
       ) : (
         <div>
@@ -47,7 +57,7 @@ function DaySelectHeader({ day }: { day?: string }) {
   return (
     <div className="grid place-content-center w-full">
       <Form action="/log" className="flex gap-4">
-        <Select name="day" defaultValue={day}>
+        <Select name="day" defaultValue={day?.toLocaleLowerCase()}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select a Day" />
           </SelectTrigger>

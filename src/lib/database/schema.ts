@@ -14,7 +14,7 @@ export const user = sqliteTable('user', {
 
 export const userRelations = relations(user, ({ one, many }) => ({
   plan: one(workoutPlan),
-  logs: many(log),
+  logExercises: many(logExercise),
 }));
 
 export const session = sqliteTable('session', {
@@ -154,24 +154,7 @@ export const exercise = sqliteTable('exercise', {
 
 export const exerciseRelations = relations(exercise, ({ many }) => ({
   days: many(dayExercise),
-}));
-
-export const log = sqliteTable('log', {
-  id: text()
-    .primaryKey()
-    .$defaultFn(() => createId()),
-  date: integer({ mode: 'timestamp' }).notNull(),
-  userId: text()
-    .notNull()
-    .references(() => user.id, { onDelete: 'cascade' }),
-});
-
-export const logRelations = relations(log, ({ one, many }) => ({
-  user: one(user, {
-    fields: [log.userId],
-    references: [user.id],
-  }),
-  exercises: many(logExercise),
+  logExercises: many(logExercise),
 }));
 
 export const logExercise = sqliteTable('logExercise', {
@@ -184,18 +167,19 @@ export const logExercise = sqliteTable('logExercise', {
   exerciseId: text()
     .notNull()
     .references(() => exercise.id),
-  logId: text()
+  date: text().notNull(),
+  userId: text()
     .notNull()
-    .references(() => log.id, { onDelete: 'cascade' }),
+    .references(() => user.id),
 });
 
 export const logExerciseRelations = relations(logExercise, ({ one }) => ({
-  log: one(log, {
-    fields: [logExercise.logId],
-    references: [log.id],
-  }),
   exercise: one(exercise, {
     fields: [logExercise.exerciseId],
     references: [exercise.id],
+  }),
+  user: one(user, {
+    fields: [logExercise.userId],
+    references: [user.id],
   }),
 }));

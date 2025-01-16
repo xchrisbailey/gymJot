@@ -5,7 +5,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { authClient } from '@/lib/auth-client';
 import { valibotResolver } from '@hookform/resolvers/valibot';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import * as v from 'valibot';
 
@@ -75,7 +75,7 @@ export default function SignUpForm() {
             </FormItem>
           )}
         />
-        <div className="flex w-full gap-4">
+        <div className="flex gap-4 w-full">
           <FormField
             control={form.control}
             name="firstName"
@@ -103,7 +103,7 @@ export default function SignUpForm() {
             )}
           />
         </div>
-        <div className="flex w-full gap-4">
+        <div className="flex gap-4 w-full">
           <FormField
             control={form.control}
             name="password"

@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "a90d67cc-b716-428f-9b88-4d0d2bf93970",
+  "id": "777b370e-f73d-408f-bee7-941df7f023aa",
   "prevId": "7c020222-21ef-4671-a758-7c826f2c8148",
   "tables": {
     "account": {
@@ -352,51 +352,6 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "log": {
-      "name": "log",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "date": {
-          "name": "date",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "userId": {
-          "name": "userId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "log_userId_user_id_fk": {
-          "name": "log_userId_user_id_fk",
-          "tableFrom": "log",
-          "tableTo": "user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
     "logExercise": {
       "name": "logExercise",
       "columns": {
@@ -435,8 +390,15 @@
           "notNull": true,
           "autoincrement": false
         },
-        "logId": {
-          "name": "logId",
+        "date": {
+          "name": "date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "userId": {
+          "name": "userId",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -458,17 +420,17 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "logExercise_logId_log_id_fk": {
-          "name": "logExercise_logId_log_id_fk",
+        "logExercise_userId_user_id_fk": {
+          "name": "logExercise_userId_user_id_fk",
           "tableFrom": "logExercise",
-          "tableTo": "log",
+          "tableTo": "user",
           "columnsFrom": [
-            "logId"
+            "userId"
           ],
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
+          "onDelete": "no action",
           "onUpdate": "no action"
         }
       },

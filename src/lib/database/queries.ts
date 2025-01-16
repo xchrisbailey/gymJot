@@ -1,7 +1,7 @@
-import { DayExerciseWithRelations, DayWithRelations, Exercise, WorkoutPlanWithRelations } from '@/types';
+import { DayExerciseWithRelations, DayWithRelations, Exercise, Log, WorkoutPlanWithRelations } from '@/types';
 import { db } from '.';
 import { day, dayExercise, workoutPlan } from './schema';
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 
 export async function getAllExercises(): Promise<Exercise[]> {
   return await db.query.exercise.findMany();
