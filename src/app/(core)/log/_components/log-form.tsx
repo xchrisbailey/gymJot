@@ -33,7 +33,7 @@ export default function LogForm({ day, exercises }: LogFormProps) {
           <div className="grid grid-cols-3 gap-4">
             <div>
               <Label htmlFor="sets">Sets</Label>
-              <Input id="sets" type="number" min={0} max={exercise.sets} defaultValue={1} />
+              <Input id="sets" type="number" min={0} max={exercise.sets} defaultValue={1} required />
               <p className="text-sm text-gray-500">Planned: {exercise.sets}</p>
             </div>
             <div>
