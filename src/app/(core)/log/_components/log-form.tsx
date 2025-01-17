@@ -6,11 +6,12 @@ import { Label } from '@/components/ui/label';
 import { ActionState, DayExerciseWithRelations } from '@/types';
 import { useActionState, useState } from 'react';
 import { submitLog } from '../_actions';
-import { CalendarIcon, Check } from 'lucide-react';
+import { AlertCircle, CalendarIcon, Check } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 interface LogFormProps {
   day: string;
@@ -36,7 +37,7 @@ function FormFields({ exercise }: { exercise: DayExerciseWithRelations }) {
 
   return (
     <form action={formAction} className="space-y-6" key={exercise.id}>
-      <div className="rounded-lg border p-4">
+      <div className="p-4 rounded-lg border">
         <h3 className="mb-2 text-xl font-semibold">{exercise.exercise.name}</h3>
         <div className="grid grid-cols-3 gap-4">
           <div>
@@ -77,11 +78,11 @@ function FormFields({ exercise }: { exercise: DayExerciseWithRelations }) {
                   !date && 'text-muted-foreground'
                 )}
               >
-                <CalendarIcon className="mr-2 h-4 w-4" />
+                <CalendarIcon className="mr-2 w-4 h-4" />
                 {date ? format(date, 'PPP') : <span>Pick a date</span>}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0">
+            <PopoverContent className="p-0 w-auto">
               <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
             </PopoverContent>
           </Popover>
@@ -90,16 +91,30 @@ function FormFields({ exercise }: { exercise: DayExerciseWithRelations }) {
         <input type="hidden" value={exercise.exercise.id} name="exerciseId" />
         <input type="hidden" value={date?.toISOString()} name="date" />
 
-        <span className="block text-sm font-semibold text-rose-600">
-          {state.error && state.error}
-        </span>
+        {state.error && (
+          <Alert
+            variant={state.error.includes('already logged') ? 'warning' : 'destructive'}
+            className="my-2"
+          >
+            <AlertCircle className="w-4 h-4" />
+            <AlertTitle>
+              {state.error.includes('already logged') ? 'Warning' : 'Error'}
+            </AlertTitle>
+            <AlertDescription>{state.error}</AlertDescription>
+          </Alert>
+        )}
+
         <Button
           type="submit"
           size="sm"
           disabled={state.success || pending}
           className="mt-2"
         >
-          {state.success ? <Check /> : `Log ${exercise.exercise.name}`}
+          {state.success || state.error?.includes('already logged') ? (
+            <Check />
+          ) : (
+            `Log ${exercise.exercise.name}`
+          )}
         </Button>
       </div>
     </form>

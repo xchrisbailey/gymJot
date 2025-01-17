@@ -165,21 +165,25 @@ export const exerciseRelations = relations(exercise, ({ many }) => ({
   logExercises: many(logExercise),
 }));
 
-export const logExercise = sqliteTable('logExercise', {
-  id: text()
-    .primaryKey()
-    .$defaultFn(() => createId()),
-  reps: integer(),
-  sets: integer().notNull(),
-  weight: integer(),
-  exerciseId: text()
-    .notNull()
-    .references(() => exercise.id),
-  date: text().notNull(),
-  userId: text()
-    .notNull()
-    .references(() => user.id),
-});
+export const logExercise = sqliteTable(
+  'logExercise',
+  {
+    id: text()
+      .primaryKey()
+      .$defaultFn(() => createId()),
+    reps: integer(),
+    sets: integer().notNull(),
+    weight: integer(),
+    exerciseId: text()
+      .notNull()
+      .references(() => exercise.id),
+    date: text().notNull(),
+    userId: text()
+      .notNull()
+      .references(() => user.id),
+  },
+  (t) => [unique().on(t.exerciseId, t.date, t.userId)]
+);
 
 export const logExerciseRelations = relations(logExercise, ({ one }) => ({
   exercise: one(exercise, {

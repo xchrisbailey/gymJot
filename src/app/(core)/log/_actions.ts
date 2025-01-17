@@ -3,6 +3,7 @@
 import { auth } from '@/lib/auth';
 import { db } from '@/lib/database';
 import { logExercise } from '@/lib/database/schema';
+import { errorToReponseMessage } from '@/lib/error-format';
 import { ActionState } from '@/types';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -40,15 +41,9 @@ export async function submitLog(prevState: ActionState, formData: FormData) {
       date: new Date(data.output.date).toLocaleDateString(),
     });
   } catch (err) {
-    if (err instanceof Error) {
-      return {
-        success: false,
-        error: err.message,
-      };
-    }
     return {
       success: false,
-      error: 'an unknown error occurred',
+      error: errorToReponseMessage(err),
     };
   }
 
