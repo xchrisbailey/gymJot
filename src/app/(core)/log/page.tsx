@@ -24,7 +24,7 @@ export default async function LogPage(props: { searchParams: SearchParams }) {
     return (
       <div>
         <Alert variant="destructive" className="mb-2">
-          <AlertCircle className="w-4 h-4" />
+          <AlertCircle className="h-4 w-4" />
           <AlertTitle>No Day Selected</AlertTitle>
           <AlertDescription>Please select a day to start logging</AlertDescription>
         </Alert>

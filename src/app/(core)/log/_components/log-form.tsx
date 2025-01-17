@@ -37,7 +37,7 @@ function FormFields({ exercise }: { exercise: DayExerciseWithRelations }) {
 
   return (
     <form action={formAction} className="space-y-6" key={exercise.id}>
-      <div className="p-4 rounded-lg border">
+      <div className="rounded-lg border p-4">
         <h3 className="mb-2 text-xl font-semibold">{exercise.exercise.name}</h3>
         <div className="grid grid-cols-3 gap-4">
           <div>
@@ -78,11 +78,11 @@ function FormFields({ exercise }: { exercise: DayExerciseWithRelations }) {
                   !date && 'text-muted-foreground'
                 )}
               >
-                <CalendarIcon className="mr-2 w-4 h-4" />
+                <CalendarIcon className="mr-2 h-4 w-4" />
                 {date ? format(date, 'PPP') : <span>Pick a date</span>}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="p-0 w-auto">
+            <PopoverContent className="w-auto p-0">
               <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
             </PopoverContent>
           </Popover>
@@ -96,7 +96,7 @@ function FormFields({ exercise }: { exercise: DayExerciseWithRelations }) {
             variant={state.error.includes('already logged') ? 'warning' : 'destructive'}
             className="my-2"
           >
-            <AlertCircle className="w-4 h-4" />
+            <AlertCircle className="h-4 w-4" />
             <AlertTitle>
               {state.error.includes('already logged') ? 'Warning' : 'Error'}
             </AlertTitle>
