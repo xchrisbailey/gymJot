@@ -1,7 +1,7 @@
 import { auth } from '@/lib/auth';
 import { getAllExercises, getWorkoutPlanDay } from '@/lib/database/queries';
 import { headers } from 'next/headers';
-import { redirect } from 'next/navigation';
+import { redirect, unauthorized } from 'next/navigation';
 import { ExerciseArticle } from '../_components/exercise_article';
 import ExerciseToPlanForm from '../_components/exercise_to_plan_form';
 import { Separator } from '@/components/ui/separator';
@@ -20,7 +20,7 @@ export default async function EditPlanPage(props: Props) {
     headers: await headers(),
   });
 
-  if (!session?.user) return redirect('/sign-in');
+  if (!session?.user) unauthorized();
 
   const exercisesPromise = getAllExercises();
 
@@ -30,13 +30,13 @@ export default async function EditPlanPage(props: Props) {
   if (!dayPlan) return redirect('/plan');
 
   return (
-    <div className="container mx-auto py-8">
-      <div className="mb-5 flex items-center justify-end">
+    <div className="container py-8 mx-auto">
+      <div className="flex justify-end items-center mb-5">
         <div>
           <BackButton />
         </div>
       </div>
-      <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-5 w-full md:grid-cols-2">
         <div>
           <h2>Current Exercises</h2>
           {dayPlan.dayExercises.map((dayExercise) => (

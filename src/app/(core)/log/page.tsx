@@ -18,8 +18,7 @@ export default async function LogPage(props: { searchParams: SearchParams }) {
     headers: await headers(),
   });
 
-  if (!session?.user) throw unauthorized();
-  // const logId = await createLogIfNotExists(session.user.id);
+  if (!session?.user.id) unauthorized();
 
   const searchParams = await props.searchParams;
   const day = searchParams.day ?? new Date().toLocaleDateString('en-us', { weekday: 'long' });
