@@ -9,7 +9,14 @@ import { BackButton } from '../_components/back_button';
 
 type Props = {
   searchParams: Promise<{
-    day: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+    day:
+      | 'monday'
+      | 'tuesday'
+      | 'wednesday'
+      | 'thursday'
+      | 'friday'
+      | 'saturday'
+      | 'sunday';
 
     [key: string]: string | string[] | undefined;
   }>;

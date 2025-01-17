@@ -86,7 +86,15 @@ export const day = sqliteTable(
       .primaryKey()
       .$defaultFn(() => createId()),
     name: text({
-      enum: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
+      enum: [
+        'monday',
+        'tuesday',
+        'wednesday',
+        'thursday',
+        'friday',
+        'saturday',
+        'sunday',
+      ],
     }).notNull(),
     workoutPlanId: text()
       .notNull()

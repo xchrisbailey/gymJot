@@ -56,19 +56,43 @@ export async function newWorkoutPlanAction() {
 }
 
 const addExerciseToPlanSchema = v.object({
-  dayId: v.pipe(v.string(), v.nonEmpty('must select a exercise'), v.cuid2('must select a exercise')),
-  exerciseId: v.pipe(v.string(), v.nonEmpty('must select a exercise'), v.cuid2('must select a exercise')),
-  sets: v.pipe(v.unknown(), v.transform(Number), v.number(), v.minValue(1, 'Must have at least one set')),
-  reps: v.pipe(v.unknown(), v.transform(Number), v.number(), v.minValue(1, 'Must have at least one rep')),
+  dayId: v.pipe(
+    v.string(),
+    v.nonEmpty('must select a exercise'),
+    v.cuid2('must select a exercise')
+  ),
+  exerciseId: v.pipe(
+    v.string(),
+    v.nonEmpty('must select a exercise'),
+    v.cuid2('must select a exercise')
+  ),
+  sets: v.pipe(
+    v.unknown(),
+    v.transform(Number),
+    v.number(),
+    v.minValue(1, 'Must have at least one set')
+  ),
+  reps: v.pipe(
+    v.unknown(),
+    v.transform(Number),
+    v.number(),
+    v.minValue(1, 'Must have at least one rep')
+  ),
 });
 
-export async function addExerciseToPlanAction(prevState: ActionState, formData: FormData) {
+export async function addExerciseToPlanAction(
+  prevState: ActionState,
+  formData: FormData
+) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
   if (!session) return redirect('/sign-in');
 
-  const data = await v.safeParseAsync(addExerciseToPlanSchema, Object.fromEntries(formData));
+  const data = await v.safeParseAsync(
+    addExerciseToPlanSchema,
+    Object.fromEntries(formData)
+  );
 
   if (!data.success) {
     const issues = v.flatten<typeof addExerciseToPlanSchema>(data.issues);
@@ -111,7 +135,11 @@ export async function removeExerciseFromPlanAction(dayExerciseId: string) {
 
   if (!session?.user) return redirect('/sign-in');
   try {
-    await db.delete(dayExercise).where(and(eq(dayExercise.id, dayExerciseId), eq(dayExercise.userId, session.user.id)));
+    await db
+      .delete(dayExercise)
+      .where(
+        and(eq(dayExercise.id, dayExerciseId), eq(dayExercise.userId, session.user.id))
+      );
   } catch (err) {
     if (err instanceof Error) {
       return {

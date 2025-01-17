@@ -2,7 +2,12 @@
 
 import { use } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { WorkoutPlanWithRelations } from '@/types';
@@ -54,7 +59,9 @@ export function WorkoutPlanView({ workoutPlanPromise }: Props) {
                 <AccordionTrigger className="hover:no-underline">
                   <div className="flex w-full justify-between">
                     <span className="capitalize">{dayName}</span>
-                    <span className="text-muted-foreground">{day?.dayExercises.length || 0} exercise(s)</span>
+                    <span className="text-muted-foreground">
+                      {day?.dayExercises.length || 0} exercise(s)
+                    </span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent>
@@ -67,12 +74,16 @@ export function WorkoutPlanView({ workoutPlanPromise }: Props) {
                     ))
                   ) : (
                     <div>
-                      <p className="mb-2 text-muted-foreground">No exercises planned for this day.</p>
+                      <p className="mb-2 text-muted-foreground">
+                        No exercises planned for this day.
+                      </p>
                     </div>
                   )}
                   <Button variant="outline" asChild>
                     <Link href={`/plan/view?day=${day.name}`}>
-                      View/Edit <span style={{ textTransform: 'capitalize' }}>{dayName}</span> Workout
+                      View/Edit{' '}
+                      <span style={{ textTransform: 'capitalize' }}>{dayName}</span>{' '}
+                      Workout
                     </Link>
                   </Button>
                 </AccordionContent>

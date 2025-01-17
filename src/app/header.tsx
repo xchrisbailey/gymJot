@@ -12,7 +12,9 @@ export function Header() {
     <header className="flex h-16 shrink-0 items-center gap-4 px-4">
       <SidebarTrigger className="-ml-1" />
       <Separator orientation="vertical" className="mr-2 h-4" />
-      <h1 className="text-2xl font-bold">{formatPathName(pathName, searchParams.get('day'))}</h1>
+      <h1 className="text-2xl font-bold">
+        {formatPathName(pathName, searchParams.get('day'))}
+      </h1>
     </header>
   );
 }

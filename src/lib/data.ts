@@ -202,4 +202,12 @@ export const usStates: readonly { name: string; value: StateCode }[] = [
   { name: 'Wyoming', value: 'WY' },
 ] as const;
 
-export const daysOfWeek: Day['name'][] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+export const daysOfWeek: Day['name'][] = [
+  'sunday',
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+];

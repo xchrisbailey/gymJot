@@ -1,4 +1,11 @@
-import { day, dayExercise, exercise, log, logExercise, workoutPlan } from './lib/database/schema';
+import {
+  day,
+  dayExercise,
+  exercise,
+  log,
+  logExercise,
+  workoutPlan,
+} from './lib/database/schema';
 
 export type ActionState = {
   error?: string;

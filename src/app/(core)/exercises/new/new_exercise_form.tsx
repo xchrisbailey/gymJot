@@ -7,13 +7,22 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { exerciseCategories, muscleGroups } from '@/lib/data';
 
 export default function NewExerciseForm() {
-  const [state, formAction, pending] = useActionState<ActionState, FormData>(newExercise, {
-    error: '',
-  });
+  const [state, formAction, pending] = useActionState<ActionState, FormData>(
+    newExercise,
+    {
+      error: '',
+    }
+  );
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -48,7 +57,10 @@ export default function NewExerciseForm() {
               </SelectTrigger>
               <SelectContent>
                 {exerciseCategories.map((category) => (
-                  <SelectItem value={category.toLowerCase()} key={category.split(' ').join().toLowerCase()}>
+                  <SelectItem
+                    value={category.toLowerCase()}
+                    key={category.split(' ').join().toLowerCase()}
+                  >
                     {category}
                   </SelectItem>
                 ))}
@@ -65,7 +77,10 @@ export default function NewExerciseForm() {
               </SelectTrigger>
               <SelectContent>
                 {muscleGroups.map((muscleGroup) => (
-                  <SelectItem value={muscleGroup.toLowerCase()} key={muscleGroup.split(' ').join().toLowerCase()}>
+                  <SelectItem
+                    value={muscleGroup.toLowerCase()}
+                    key={muscleGroup.split(' ').join().toLowerCase()}
+                  >
                     {muscleGroup}
                   </SelectItem>
                 ))}

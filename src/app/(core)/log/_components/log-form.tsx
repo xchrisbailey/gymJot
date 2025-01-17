@@ -29,7 +29,10 @@ export default function LogFormList({ exercises }: LogFormProps) {
 
 function FormFields({ exercise }: { exercise: DayExerciseWithRelations }) {
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [state, formAction, pending] = useActionState<ActionState, FormData>(submitLog, {});
+  const [state, formAction, pending] = useActionState<ActionState, FormData>(
+    submitLog,
+    {}
+  );
 
   return (
     <form action={formAction} className="space-y-6" key={exercise.id}>
@@ -38,12 +41,25 @@ function FormFields({ exercise }: { exercise: DayExerciseWithRelations }) {
         <div className="grid grid-cols-3 gap-4">
           <div>
             <Label htmlFor="sets">Sets</Label>
-            <Input name="sets" type="number" min={0} max={exercise.sets} defaultValue={1} required />
+            <Input
+              name="sets"
+              type="number"
+              min={0}
+              max={exercise.sets}
+              defaultValue={1}
+              required
+            />
             <p className="text-sm text-gray-500">Planned: {exercise.sets}</p>
           </div>
           <div>
             <Label htmlFor="reps">Reps</Label>
-            <Input name="reps" type="number" min={0} max={exercise.reps} defaultValue={1} />
+            <Input
+              name="reps"
+              type="number"
+              min={0}
+              max={exercise.reps}
+              defaultValue={1}
+            />
             <p className="text-sm text-gray-500">Planned: {exercise.reps}</p>
           </div>
           <div>
@@ -56,7 +72,10 @@ function FormFields({ exercise }: { exercise: DayExerciseWithRelations }) {
             <PopoverTrigger asChild>
               <Button
                 variant={'outline'}
-                className={cn('w-full justify-start text-left font-normal', !date && 'text-muted-foreground')}
+                className={cn(
+                  'w-full justify-start text-left font-normal',
+                  !date && 'text-muted-foreground'
+                )}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {date ? format(date, 'PPP') : <span>Pick a date</span>}
@@ -71,8 +90,15 @@ function FormFields({ exercise }: { exercise: DayExerciseWithRelations }) {
         <input type="hidden" value={exercise.exercise.id} name="exerciseId" />
         <input type="hidden" value={date?.toISOString()} name="date" />
 
-        <span className="block text-sm font-semibold text-rose-600">{state.error && state.error}</span>
-        <Button type="submit" size="sm" disabled={state.success || pending} className="mt-2">
+        <span className="block text-sm font-semibold text-rose-600">
+          {state.error && state.error}
+        </span>
+        <Button
+          type="submit"
+          size="sm"
+          disabled={state.success || pending}
+          className="mt-2"
+        >
           {state.success ? <Check /> : `Log ${exercise.exercise.name}`}
         </Button>
       </div>

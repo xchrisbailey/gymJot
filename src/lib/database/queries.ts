@@ -1,4 +1,9 @@
-import { DayExerciseWithRelations, DayWithRelations, Exercise, Log, WorkoutPlanWithRelations } from '@/types';
+import {
+  DayExerciseWithRelations,
+  DayWithRelations,
+  Exercise,
+  WorkoutPlanWithRelations,
+} from '@/types';
 import { db } from '.';
 import { day, dayExercise, workoutPlan } from './schema';
 import { and, eq } from 'drizzle-orm';
@@ -7,7 +12,9 @@ export async function getAllExercises(): Promise<Exercise[]> {
   return await db.query.exercise.findMany();
 }
 
-export async function getWorkoutPlan(userId: string): Promise<WorkoutPlanWithRelations | undefined> {
+export async function getWorkoutPlan(
+  userId: string
+): Promise<WorkoutPlanWithRelations | undefined> {
   return await db.query.workoutPlan.findFirst({
     where: eq(workoutPlan.userId, userId),
     with: {
@@ -32,13 +39,24 @@ export async function getWorkoutPlanDay(
 }
 
 export async function getPlanByDay(
-  dayName: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'
+  dayName:
+    | 'monday'
+    | 'tuesday'
+    | 'wednesday'
+    | 'thursday'
+    | 'friday'
+    | 'saturday'
+    | 'sunday',
+  userId: string
 ): Promise<DayExerciseWithRelations[] | undefined> {
   return await db.transaction(async (t) => {
-    const d = await t.query.day.findFirst({ where: eq(day.name, dayName), columns: { id: true } });
+    const d = await t.query.day.findFirst({
+      where: eq(day.name, dayName),
+      columns: { id: true },
+    });
     if (!d) return undefined;
     return await t.query.dayExercise.findMany({
-      where: eq(dayExercise.dayId, d.id),
+      where: and(eq(dayExercise.dayId, d.id), eq(dayExercise.userId, userId)),
       with: { exercise: true },
     });
   });

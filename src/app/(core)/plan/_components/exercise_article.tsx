@@ -16,14 +16,20 @@ export function ExerciseArticle({ dayExercise }: Props) {
             {dayExercise.sets} sets of {dayExercise.reps} reps
           </p>
           {dayExercise.exercise.description && (
-            <p className="mt-1 text-sm text-muted-foreground">{dayExercise.exercise.description}</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {dayExercise.exercise.description}
+            </p>
           )}
           <div className="mt-2 flex flex-wrap gap-2">
-            {dayExercise.exercise.category && <Badge variant="secondary">{dayExercise.exercise.category}</Badge>}
+            {dayExercise.exercise.category && (
+              <Badge variant="secondary">{dayExercise.exercise.category}</Badge>
+            )}
             {dayExercise.exercise.primaryMuscle && (
               <Badge variant="outline">{dayExercise.exercise.primaryMuscle}</Badge>
             )}
-            {dayExercise.exercise.equipment && <Badge>{dayExercise.exercise.equipment}</Badge>}
+            {dayExercise.exercise.equipment && (
+              <Badge>{dayExercise.exercise.equipment}</Badge>
+            )}
           </div>
           {dayExercise.exercise.url && (
             <a

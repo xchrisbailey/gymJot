@@ -1,6 +1,12 @@
 'use client';
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { daysOfWeek } from '@/lib/data';
 import Form from 'next/form';
 import { useRef } from 'react';
@@ -10,7 +16,11 @@ export function DaySelectHeader({ day }: { day?: string }) {
   return (
     <div className="grid w-full place-content-center">
       <Form action="/log" className="flex gap-4" ref={formRef}>
-        <Select name="day" defaultValue={day?.toLocaleLowerCase()} onValueChange={() => formRef.current?.submit()}>
+        <Select
+          name="day"
+          defaultValue={day?.toLocaleLowerCase()}
+          onValueChange={() => formRef.current?.submit()}
+        >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select a Day" />
           </SelectTrigger>

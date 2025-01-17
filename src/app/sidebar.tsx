@@ -1,4 +1,15 @@
-import { ChevronDown, CreditCard, Dumbbell, FileText, List, LogIn, LogOut, Plus, User, UserPlus } from 'lucide-react';
+import {
+  ChevronDown,
+  CreditCard,
+  Dumbbell,
+  FileText,
+  List,
+  LogIn,
+  LogOut,
+  Plus,
+  User,
+  UserPlus,
+} from 'lucide-react';
 import * as React from 'react';
 
 import {
