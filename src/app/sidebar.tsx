@@ -35,7 +35,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
-                <div className="flex justify-center items-center rounded-lg aspect-square size-8 bg-sidebar-primary text-sidebar-primary-foreground">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <Dumbbell className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
@@ -52,7 +52,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
                 <Link href="/plan">
-                  <CreditCard className="mr-2 w-4 h-4" />
+                  <CreditCard className="mr-2 h-4 w-4" />
                   Plan
                 </Link>
               </SidebarMenuButton>
@@ -60,7 +60,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
                 <Link href="/log">
-                  <FileText className="mr-2 w-4 h-4" />
+                  <FileText className="mr-2 h-4 w-4" />
                   Log
                 </Link>
               </SidebarMenuButton>
@@ -69,21 +69,21 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton>
-                    <Dumbbell className="mr-2 w-4 h-4" />
+                    <Dumbbell className="mr-2 h-4 w-4" />
                     Exercises
-                    <ChevronDown className="ml-auto w-4 h-4" />
+                    <ChevronDown className="ml-auto h-4 w-4" />
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem>
                     <Link href="/exercises/new" className="flex">
-                      <Plus className="mr-2 w-4 h-4" />
+                      <Plus className="mr-2 h-4 w-4" />
                       Add Exercise
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <Link href="/exercises" className="flex">
-                      <List className="mr-2 w-4 h-4" />
+                      <List className="mr-2 h-4 w-4" />
                       View All
                     </Link>
                   </DropdownMenuItem>
@@ -100,25 +100,25 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <SidebarMenuButton>
-                      <User className="mr-2 w-4 h-4" />
+                      <User className="mr-2 h-4 w-4" />
                       {session.user.name}
-                      <ChevronDown className="ml-auto w-4 h-4" />
+                      <ChevronDown className="ml-auto h-4 w-4" />
                     </SidebarMenuButton>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     <DropdownMenuItem>
                       <Link href="#profile" className="flex">
-                        <User className="mr-2 w-4 h-4" />
+                        <User className="mr-2 h-4 w-4" />
                         Profile
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Form action={signOutAction} className="p-0 m-0">
+                      <Form action={signOutAction} className="m-0 p-0">
                         <button
                           // variant="link"
-                          className="flex items-center p-0 m-0 border-none outline-none"
+                          className="m-0 flex items-center border-none p-0 outline-none"
                         >
-                          <LogOut className="mr-2 w-4 h-4" />
+                          <LogOut className="mr-2 h-4 w-4" />
                           Sign Out
                         </button>
                       </Form>
@@ -131,7 +131,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
                     <Link href="/sign-in">
-                      <LogIn className="mr-2 w-4 h-4" />
+                      <LogIn className="mr-2 h-4 w-4" />
                       Sign In
                     </Link>
                   </SidebarMenuButton>
@@ -139,7 +139,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
                     <Link href="/sign-up">
-                      <UserPlus className="mr-2 w-4 h-4" />
+                      <UserPlus className="mr-2 h-4 w-4" />
                       Sign Up
                     </Link>
                   </SidebarMenuButton>

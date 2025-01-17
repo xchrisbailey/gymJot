@@ -30,13 +30,13 @@ export default async function EditPlanPage(props: Props) {
   if (!dayPlan) return redirect('/plan');
 
   return (
-    <div className="container py-8 mx-auto">
-      <div className="flex justify-end items-center mb-5">
+    <div className="container mx-auto py-8">
+      <div className="mb-5 flex items-center justify-end">
         <div>
           <BackButton />
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-5 w-full md:grid-cols-2">
+      <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2">
         <div>
           <h2>Current Exercises</h2>
           {dayPlan.dayExercises.map((dayExercise) => (

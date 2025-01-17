@@ -15,7 +15,7 @@ export default async function PlanPage() {
   const planPromise = getWorkoutPlan(session.user.id);
 
   return (
-    <div className="container py-8 mx-auto">
+    <div className="container mx-auto py-8">
       <h1 className="mb-5">Your Plan</h1>
       <Suspense fallback={<div>Loading...</div>}>
         <WorkoutPlanView workoutPlanPromise={planPromise} />

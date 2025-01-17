@@ -75,7 +75,7 @@ export default function SignUpForm() {
             </FormItem>
           )}
         />
-        <div className="flex gap-4 w-full">
+        <div className="flex w-full gap-4">
           <FormField
             control={form.control}
             name="firstName"
@@ -103,7 +103,7 @@ export default function SignUpForm() {
             )}
           />
         </div>
-        <div className="flex gap-4 w-full">
+        <div className="flex w-full gap-4">
           <FormField
             control={form.control}
             name="password"

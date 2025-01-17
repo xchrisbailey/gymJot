@@ -8,7 +8,7 @@ import { useRef } from 'react';
 export function DaySelectHeader({ day }: { day?: string }) {
   const formRef = useRef<HTMLFormElement>(null);
   return (
-    <div className="grid place-content-center w-full">
+    <div className="grid w-full place-content-center">
       <Form action="/log" className="flex gap-4" ref={formRef}>
         <Select name="day" defaultValue={day?.toLocaleLowerCase()} onValueChange={() => formRef.current?.submit()}>
           <SelectTrigger className="w-[180px]">

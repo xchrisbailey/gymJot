@@ -37,13 +37,13 @@ export default function ExerciseToPlanForm({ exercisesPromise, dayId }: Props) {
                   variant="outline"
                   role="combobox"
                   aria-expanded={exerciseListOpen}
-                  className="justify-between w-full"
+                  className="w-full justify-between"
                 >
                   {exerciseId ? exercises.find((exercise) => exercise.id === exerciseId)?.name : 'Select exercise...'}
-                  <ChevronsUpDown className="ml-2 w-4 h-4 opacity-50 shrink-0" />
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="p-0 w-full">
+              <PopoverContent className="w-full p-0">
                 <Command>
                   <CommandInput placeholder="Search exercise..." />
                   <CommandList>
@@ -74,7 +74,7 @@ export default function ExerciseToPlanForm({ exercisesPromise, dayId }: Props) {
             )}
           </>
         ) : (
-          <div className="py-2 px-3 bg-yellow-100 rounded">
+          <div className="rounded bg-yellow-100 px-3 py-2">
             <p>
               no exercises in database.{' '}
               <a href="/exercises/new" className="underline">
@@ -96,7 +96,7 @@ export default function ExerciseToPlanForm({ exercisesPromise, dayId }: Props) {
       </div>
 
       {state.error && (
-        <p className="p-2 my-2 text-base font-semibold text-rose-600 bg-rose-100 rounded">{state.error}</p>
+        <p className="my-2 rounded bg-rose-100 p-2 text-base font-semibold text-rose-600">{state.error}</p>
       )}
       <Button type="submit" disabled={pending}>
         {pending ? 'Adding...' : 'Add Exercise'}
