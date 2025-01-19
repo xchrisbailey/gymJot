@@ -2,7 +2,6 @@ import {
   day,
   dayExercise,
   exercise,
-  log,
   logExercise,
   workoutPlan,
 } from './lib/database/schema';
@@ -37,12 +36,12 @@ export interface DayExerciseWithRelations extends DayExercise {
 export type Exercise = typeof exercise.$inferSelect;
 export type NewExercise = typeof exercise.$inferInsert;
 
-export type Log = typeof log.$inferSelect;
-export type NewLog = typeof log.$inferInsert;
-
 export type LogExercise = typeof logExercise.$inferSelect;
 export type NewLogExercise = typeof logExercise.$inferInsert;
 
+export type LogExerciseWithRelations = LogExercise & {
+  exercise: Exercise;
+};
 export interface WorkoutPlanWithRelations extends WorkoutPlan {
   days: DayWithRelations[];
 }

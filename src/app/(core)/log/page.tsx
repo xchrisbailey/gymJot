@@ -1,52 +1,42 @@
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { auth } from '@/lib/auth';
-import { getPlanByDay } from '@/lib/database/queries';
-import { AlertCircle } from 'lucide-react';
+import { getLoggedExercisesByDay, getPlanByDay } from '@/lib/database/queries';
 import { headers } from 'next/headers';
 import { unauthorized } from 'next/navigation';
 import LogFormList from './_components/log-form';
-import { DaySelectHeader } from './_components/day-select-header';
-import { Day, isValidDay } from './_utils';
+import { Day } from './_utils';
+import { Suspense } from 'react';
 
-type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
-
-export default async function LogPage(props: { searchParams: SearchParams }) {
+export default async function LogPage() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
   if (!session?.user.id) unauthorized();
 
-  const searchParams = await props.searchParams;
-  const day =
-    searchParams.day ?? new Date().toLocaleDateString('en-us', { weekday: 'long' });
-  if (!day || typeof day !== 'string' || !isValidDay(day.toLowerCase())) {
-    return (
-      <div>
-        <Alert variant="destructive" className="mb-2">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>No Day Selected</AlertTitle>
-          <AlertDescription>Please select a day to start logging</AlertDescription>
-        </Alert>
-        <DaySelectHeader />
-      </div>
-    );
-  }
+  const date = new Date();
+  const day = date.toLocaleString('default', { weekday: 'long' }).toLowerCase();
 
-  const dayExercises = await getPlanByDay(day.toLowerCase() as Day, session.user.id);
+  const dayExercisesPromise = getPlanByDay(day.toLowerCase() as Day, session.user.id);
+  const loggedExercisesPromise = getLoggedExercisesByDay(
+    session.user.id,
+    date.toLocaleDateString()
+  );
 
   return (
     <>
-      <DaySelectHeader day={day} />
-      {dayExercises && dayExercises.length > 0 ? (
-        <>
-          <LogFormList day={day} exercises={dayExercises} />
-        </>
-      ) : (
-        <div>
-          <a href="/plan">Fill out your plan</a>
-        </div>
-      )}
+      <div className="flex justify-center">
+        <h1>{date.toLocaleDateString('default', { dateStyle: 'full' })}</h1>
+      </div>
+      <>
+        <Suspense fallback={<div>Loading...</div>}>
+          <LogFormList
+            date={date.toISOString()}
+            day={day}
+            exercisesPromise={dayExercisesPromise}
+            loggedExercisesPromise={loggedExercisesPromise}
+          />
+        </Suspense>
+      </>
     </>
   );
 }

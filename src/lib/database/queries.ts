@@ -2,10 +2,11 @@ import {
   DayExerciseWithRelations,
   DayWithRelations,
   Exercise,
+  LogExerciseWithRelations,
   WorkoutPlanWithRelations,
 } from '@/types';
 import { db } from '.';
-import { day, dayExercise, workoutPlan } from './schema';
+import { day, dayExercise, logExercise, workoutPlan } from './schema';
 import { and, eq } from 'drizzle-orm';
 
 export async function getAllExercises(): Promise<Exercise[]> {
@@ -59,5 +60,17 @@ export async function getPlanByDay(
       where: and(eq(dayExercise.dayId, d.id), eq(dayExercise.userId, userId)),
       with: { exercise: true },
     });
+  });
+}
+
+export async function getLoggedExercisesByDay(
+  userId: string,
+  date: string
+): Promise<LogExerciseWithRelations[] | undefined> {
+  return await db.query.logExercise.findMany({
+    where: and(eq(logExercise.date, date), eq(logExercise.userId, userId)),
+    with: {
+      exercise: true,
+    },
   });
 }
