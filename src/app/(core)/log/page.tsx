@@ -1,5 +1,5 @@
 import { auth } from '@/lib/auth';
-import { getLoggedExercisesByDay, getPlanByDay } from '@/lib/database/queries';
+import { getLoggedExercisesByDate, getPlanByDay } from '@/lib/database/queries';
 import { headers } from 'next/headers';
 import { unauthorized } from 'next/navigation';
 import LogFormList from './_components/log-form';
@@ -17,7 +17,7 @@ export default async function LogPage() {
   const day = date.toLocaleString('default', { weekday: 'long' }).toLowerCase();
 
   const dayExercisesPromise = getPlanByDay(day.toLowerCase() as Day, session.user.id);
-  const loggedExercisesPromise = getLoggedExercisesByDay(
+  const loggedExercisesPromise = getLoggedExercisesByDate(
     session.user.id,
     date.toLocaleDateString()
   );

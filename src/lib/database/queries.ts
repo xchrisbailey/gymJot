@@ -63,7 +63,7 @@ export async function getPlanByDay(
   });
 }
 
-export async function getLoggedExercisesByDay(
+export async function getLoggedExercisesByDate(
   userId: string,
   date: string
 ): Promise<LogExerciseWithRelations[] | undefined> {
@@ -73,4 +73,14 @@ export async function getLoggedExercisesByDay(
       exercise: true,
     },
   });
+}
+
+export async function getAllAvaiableLoggedDates(
+  userId: string
+): Promise<string[] | undefined> {
+  const dates = await db
+    .selectDistinct({ date: logExercise.date })
+    .from(logExercise)
+    .where(eq(logExercise.userId, userId));
+  return Object.values(dates).map((d) => d.date);
 }
