@@ -6,15 +6,13 @@ import { use } from 'react';
 
 type Props = {
   query: Promise<LogExerciseWithRelations[] | undefined>;
-  date: string;
 };
 
-export function DailyLogContent({ query, date }: Props) {
+export function DailyLogContent({ query }: Props) {
   const logExercises = use(query);
 
   return (
     <div>
-      <h2 className="mb-4 text-2xl font-bold">Exercises for {date}</h2>
       <LogExerciseList exercises={logExercises} />
     </div>
   );

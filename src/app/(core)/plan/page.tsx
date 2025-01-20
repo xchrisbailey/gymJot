@@ -16,7 +16,6 @@ export default async function PlanPage() {
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="mb-5">Your Plan</h1>
       <Suspense fallback={<div>Loading...</div>}>
         <WorkoutPlanView workoutPlanPromise={planPromise} />
       </Suspense>

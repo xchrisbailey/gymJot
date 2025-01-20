@@ -39,7 +39,7 @@ export default async function LogViewPage(props: { searchParams: SearchParams })
   return (
     <>
       <Suspense fallback={<div>Loading daily log...</div>}>
-        <DailyLogContent query={loggedExercisePromise} date={date} />
+        <DailyLogContent query={loggedExercisePromise} />
       </Suspense>
     </>
   );
