@@ -1,4 +1,16 @@
-import { ChevronDown, CreditCard, Dumbbell, FileText, List, LogIn, LogOut, Plus, User, UserPlus } from 'lucide-react';
+import {
+  ChevronDown,
+  CreditCard,
+  Dumbbell,
+  FileText,
+  List,
+  LogIn,
+  LogOut,
+  Pencil,
+  Plus,
+  User,
+  UserPlus,
+} from 'lucide-react';
 import * as React from 'react';
 
 import {
@@ -58,12 +70,29 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <a href="#log">
-                  <FileText className="mr-2 h-4 w-4" />
-                  Log
-                </a>
-              </SidebarMenuButton>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <SidebarMenuButton>
+                    <FileText className="mr-2 h-4 w-4" />
+                    Log
+                    <ChevronDown className="ml-auto h-4 w-4" />
+                  </SidebarMenuButton>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>
+                    <Link href="/log/view" className="flex">
+                      <List className="mr-2 h-4 w-4" />
+                      View Log
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/log" className="flex">
+                      <Pencil className="mr-2 h-4 w-4" />
+                      Log Today
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <DropdownMenu>
@@ -76,15 +105,15 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem>
-                    <Link href="/exercises/new" className="flex">
-                      <Plus className="mr-2 h-4 w-4" />
-                      Add Exercise
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
                     <Link href="/exercises" className="flex">
                       <List className="mr-2 h-4 w-4" />
                       View All
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/exercises/new" className="flex">
+                      <Plus className="mr-2 h-4 w-4" />
+                      Add Exercise
                     </Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>

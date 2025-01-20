@@ -1,11 +1,18 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { authClient } from '@/lib/auth-client';
 import { valibotResolver } from '@hookform/resolvers/valibot';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import * as v from 'valibot';
 
@@ -69,7 +76,13 @@ export default function SignUpForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="your email" type="email" autoComplete="email" required {...field} />
+                <Input
+                  placeholder="your email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -83,7 +96,12 @@ export default function SignUpForm() {
               <FormItem className="grow">
                 <FormLabel>First Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="your first name" required {...field} autoComplete="given-name" />
+                  <Input
+                    placeholder="your first name"
+                    required
+                    {...field}
+                    autoComplete="given-name"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -96,7 +114,12 @@ export default function SignUpForm() {
               <FormItem className="grow">
                 <FormLabel>Last Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="your last name" required {...field} autoComplete="family-name" />
+                  <Input
+                    placeholder="your last name"
+                    required
+                    {...field}
+                    autoComplete="family-name"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -111,7 +134,13 @@ export default function SignUpForm() {
               <FormItem className="grow">
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="enter password" type="password" autoComplete="new-password" required {...field} />
+                  <Input
+                    placeholder="enter password"
+                    type="password"
+                    autoComplete="new-password"
+                    required
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

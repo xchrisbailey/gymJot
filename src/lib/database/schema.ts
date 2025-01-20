@@ -12,8 +12,9 @@ export const user = sqliteTable('user', {
   updatedAt: integer({ mode: 'timestamp' }).notNull(),
 });
 
-export const userRelations = relations(user, ({ one }) => ({
+export const userRelations = relations(user, ({ one, many }) => ({
   plan: one(workoutPlan),
+  logExercises: many(logExercise),
 }));
 
 export const session = sqliteTable('session', {
@@ -85,7 +86,15 @@ export const day = sqliteTable(
       .primaryKey()
       .$defaultFn(() => createId()),
     name: text({
-      enum: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
+      enum: [
+        'monday',
+        'tuesday',
+        'wednesday',
+        'thursday',
+        'friday',
+        'saturday',
+        'sunday',
+      ],
     }).notNull(),
     workoutPlanId: text()
       .notNull()
@@ -143,7 +152,7 @@ export const exercise = sqliteTable('exercise', {
   id: text()
     .primaryKey()
     .$defaultFn(() => createId()),
-  name: text().notNull(),
+  name: text().notNull().unique(),
   description: text(),
   url: text(),
   category: text(),
@@ -153,4 +162,36 @@ export const exercise = sqliteTable('exercise', {
 
 export const exerciseRelations = relations(exercise, ({ many }) => ({
   days: many(dayExercise),
+  logExercises: many(logExercise),
+}));
+
+export const logExercise = sqliteTable(
+  'logExercise',
+  {
+    id: text()
+      .primaryKey()
+      .$defaultFn(() => createId()),
+    reps: integer(),
+    sets: integer().notNull(),
+    weight: integer(),
+    exerciseId: text()
+      .notNull()
+      .references(() => exercise.id),
+    date: text().notNull(),
+    userId: text()
+      .notNull()
+      .references(() => user.id),
+  },
+  (t) => [unique().on(t.exerciseId, t.date, t.userId)]
+);
+
+export const logExerciseRelations = relations(logExercise, ({ one }) => ({
+  exercise: one(exercise, {
+    fields: [logExercise.exerciseId],
+    references: [exercise.id],
+  }),
+  user: one(user, {
+    fields: [logExercise.userId],
+    references: [user.id],
+  }),
 }));

@@ -1,7 +1,7 @@
 import { auth } from '@/lib/auth';
 import { getAllExercises, getWorkoutPlanDay } from '@/lib/database/queries';
 import { headers } from 'next/headers';
-import { redirect } from 'next/navigation';
+import { redirect, unauthorized } from 'next/navigation';
 import { ExerciseArticle } from '../_components/exercise_article';
 import ExerciseToPlanForm from '../_components/exercise_to_plan_form';
 import { Separator } from '@/components/ui/separator';
@@ -9,7 +9,14 @@ import { BackButton } from '../_components/back_button';
 
 type Props = {
   searchParams: Promise<{
-    day: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+    day:
+      | 'monday'
+      | 'tuesday'
+      | 'wednesday'
+      | 'thursday'
+      | 'friday'
+      | 'saturday'
+      | 'sunday';
 
     [key: string]: string | string[] | undefined;
   }>;
@@ -20,7 +27,7 @@ export default async function EditPlanPage(props: Props) {
     headers: await headers(),
   });
 
-  if (!session?.user) return redirect('/sign-in');
+  if (!session?.user) unauthorized();
 
   const exercisesPromise = getAllExercises();
 

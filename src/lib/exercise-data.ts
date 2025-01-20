@@ -5,7 +5,8 @@ export const exerciseData: Exercise[] = [
     name: 'Barbell Bench Press',
     id: 'bb-bench-press',
     url: 'https://www.youtube.com/watch?v=gRVjAtPip0Y',
-    description: 'Lie on a flat bench and press a barbell up from chest level to full arm extension',
+    description:
+      'Lie on a flat bench and press a barbell up from chest level to full arm extension',
     category: 'strength',
     primaryMuscle: 'chest',
     equipment: 'barbell',
@@ -24,7 +25,8 @@ export const exerciseData: Exercise[] = [
     name: 'Deadlift',
     id: 'deadlift',
     url: 'https://www.youtube.com/watch?v=ytGaGIn3SjE',
-    description: 'Lift a barbell from the ground to hip level while maintaining a straight back',
+    description:
+      'Lift a barbell from the ground to hip level while maintaining a straight back',
     category: 'strength',
     primaryMuscle: 'back',
     equipment: 'barbell',
@@ -231,7 +233,8 @@ export const exerciseData: Exercise[] = [
     name: 'Seated Cable Rows',
     id: 'seated-cable-rows',
     url: 'https://www.youtube.com/watch?v=GZbfZ033f74',
-    description: 'Pull cable attachment towards lower chest while seated with feet braced',
+    description:
+      'Pull cable attachment towards lower chest while seated with feet braced',
     category: 'strength',
     primaryMuscle: 'back',
     equipment: 'cable machine',
@@ -249,7 +252,8 @@ export const exerciseData: Exercise[] = [
     name: 'Chest Flyes',
     id: 'chest-flyes',
     url: 'https://www.youtube.com/watch?v=eozdVDA78K0',
-    description: 'Lower dumbbells out to sides while lying on bench, then bring together over chest',
+    description:
+      'Lower dumbbells out to sides while lying on bench, then bring together over chest',
     category: 'isolation',
     primaryMuscle: 'chest',
     equipment: 'dumbbell',
@@ -258,7 +262,8 @@ export const exerciseData: Exercise[] = [
     name: 'T-Bar Row',
     id: 't-bar-row',
     url: 'https://www.youtube.com/watch?v=j3Igk5nyZE4',
-    description: 'Row weight up while bent over using T-bar apparatus or barbell in corner',
+    description:
+      'Row weight up while bent over using T-bar apparatus or barbell in corner',
     category: 'strength',
     primaryMuscle: 'back',
     equipment: 'barbell',
@@ -348,7 +353,8 @@ export const exerciseData: Exercise[] = [
     name: 'Arnold Press',
     id: 'arnold-press',
     url: 'https://www.youtube.com/watch?v=3ml7BH7mNwQ',
-    description: 'Press dumbbells overhead while rotating from forward to lateral position',
+    description:
+      'Press dumbbells overhead while rotating from forward to lateral position',
     category: 'compound',
     primaryMuscle: 'shoulders',
     equipment: 'dumbbell',
@@ -366,7 +372,8 @@ export const exerciseData: Exercise[] = [
     name: 'Pendlay Row',
     id: 'pendlay-row',
     url: 'https://www.youtube.com/watch?v=ZlRrIsoDpKg',
-    description: 'Row barbell from floor to chest while maintaining horizontal torso position',
+    description:
+      'Row barbell from floor to chest while maintaining horizontal torso position',
     category: 'strength',
     primaryMuscle: 'back',
     equipment: 'barbell',

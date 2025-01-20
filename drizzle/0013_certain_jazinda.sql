@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `logExercise_exerciseId_date_userId_unique` ON `logExercise` (`exerciseId`,`date`,`userId`);

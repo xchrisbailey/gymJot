@@ -3,12 +3,29 @@
 import { use, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@/components/ui/card';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { exerciseCategories } from '@/lib/data';
 import { Exercise } from '@/types';
 
-export function ExerciseList({ exercisesPromise }: { exercisesPromise: Promise<Exercise[]> }) {
+export function ExerciseList({
+  exercisesPromise,
+}: {
+  exercisesPromise: Promise<Exercise[]>;
+}) {
   const exercises = use(exercisesPromise);
   const [filter, setFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
@@ -72,7 +89,9 @@ export function ExerciseList({ exercisesPromise }: { exercisesPromise: Promise<E
         ))}
       </div>
       {filteredExercises.length === 0 && (
-        <p className="text-center text-gray-500">No exercises found matching your criteria.</p>
+        <p className="text-center text-gray-500">
+          No exercises found matching your criteria.
+        </p>
       )}
     </div>
   );

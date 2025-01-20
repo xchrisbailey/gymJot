@@ -1,18 +1,14 @@
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { unauthorized } from 'next/navigation';
-import NewExerciseForm from './new_exercise_form';
+import { ReactNode } from 'react';
 
-export default async function NewExercisePage() {
+export async function Protectedlayout(props: { children: ReactNode }) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
   if (!session?.user) unauthorized();
 
-  return (
-    <div className="mx-auto mt-2 w-full md:max-w-lg">
-      <NewExerciseForm />
-    </div>
-  );
+  return <>{props.children}</>;
 }
