@@ -88,7 +88,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
                   <DropdownMenuItem>
                     <Link href="/log" className="flex">
                       <Pencil className="mr-2 h-4 w-4" />
-                      Add Log
+                      Log Today
                     </Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
