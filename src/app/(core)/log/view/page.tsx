@@ -5,6 +5,8 @@ import {
 } from '@/lib/database/queries';
 import { headers } from 'next/headers';
 import { unauthorized } from 'next/navigation';
+import { Suspense } from 'react';
+import { DailyLogContent } from '../_components/log-view';
 
 type SearchParams = Promise<{ date: string | undefined }>;
 
@@ -36,8 +38,9 @@ export default async function LogViewPage(props: { searchParams: SearchParams })
 
   return (
     <>
-      <h1>Plan</h1>
-      <li>hi</li>
+      <Suspense fallback={<div>Loading daily log...</div>}>
+        <DailyLogContent query={loggedExercisePromise} date={date} />
+      </Suspense>
     </>
   );
 }
