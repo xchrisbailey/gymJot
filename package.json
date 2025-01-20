@@ -14,6 +14,7 @@
     "db:seed": "node ./src/data/seed.ts"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^1.1.0",
     "@better-fetch/fetch": "^1.1.12",
     "@hookform/resolvers": "^3.10.0",
     "@libsql/client": "^0.14.0",
@@ -27,6 +28,7 @@
     "@radix-ui/react-separator": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.1",
     "@radix-ui/react-tooltip": "^1.1.6",
+    "ai": "^4.1.0",
     "babel-plugin-react-compiler": "^19.0.0-beta-e552027-20250112",
     "better-auth": "^1.1.14",
     "class-variance-authority": "^0.7.1",

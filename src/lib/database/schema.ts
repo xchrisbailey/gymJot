@@ -160,7 +160,7 @@ export const exercise = sqliteTable('exercise', {
   equipment: text(),
 });
 
-export const exerciseRelations = relations(exercise, ({ many }) => ({
+export const xerciseRelations = relations(exercise, ({ many }) => ({
   days: many(dayExercise),
   logExercises: many(logExercise),
 }));
