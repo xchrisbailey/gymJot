@@ -26,8 +26,10 @@ type Props = {
 
 export default function ExerciseToPlanForm({ exercisesPromise, dayId }: Props) {
   const exercises = use(exercisesPromise);
+
   const [exerciseListOpen, setExerciseListOpen] = useState(false);
   const [exerciseId, setExerciseId] = useState<string>('');
+
   const [state, formAction, pending] = useActionState<ActionState, FormData>(
     addExerciseToPlanAction,
     {}
