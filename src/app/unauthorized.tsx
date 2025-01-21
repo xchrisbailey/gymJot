@@ -1,4 +1,4 @@
-import SignInForm from './(auth)/sign-in/signin_form';
+import SignInForm from './(auth)/sign-in/_components/signin_form';
 
 export default function UnauthorizedPage() {
   return (

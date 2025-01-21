@@ -2,7 +2,7 @@
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { unauthorized } from 'next/navigation';
-import NewExerciseForm from './new_exercise_form';
+import NewExerciseForm from '../_components/new_exercise_form';
 
 export default async function NewExercisePage() {
   const session = await auth.api.getSession({
