@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
-import { ExerciseList } from './exercise-list';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getAllExercises } from '@/lib/database/queries';
+import { ExerciseList } from './_components/exercise-list';
 
 export default async function ExercisesPage() {
   const exercisesPromise = getAllExercises();

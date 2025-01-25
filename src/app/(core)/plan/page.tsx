@@ -3,7 +3,7 @@ import { getWorkoutPlan } from '@/lib/database/queries';
 import { headers } from 'next/headers';
 import { unauthorized } from 'next/navigation';
 import { Suspense } from 'react';
-import { WorkoutPlanView } from './plan_view';
+import { WorkoutPlanView } from './_components/plan_view';
 
 export default async function PlanPage() {
   const session = await auth.api.getSession({

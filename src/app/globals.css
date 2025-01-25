@@ -87,7 +87,7 @@
   }
 
   h2 {
-    @apply scroll-m-20 pb-2 font-mono text-3xl font-semibold tracking-tight text-purple-600;
+    @apply scroll-m-20 pb-2 font-mono text-3xl font-semibold tracking-tight;
   }
 
   h3 {
