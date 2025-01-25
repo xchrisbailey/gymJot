@@ -18,6 +18,7 @@ import { Check, ChevronsUpDown } from 'lucide-react';
 import Form from 'next/form';
 import { use, useActionState, useState } from 'react';
 import { addExerciseToPlanAction } from '../_actions';
+import Link from 'next/link';
 
 type Props = {
   exercisesPromise: Promise<Exercise[] | undefined>;
@@ -88,6 +89,9 @@ export default function ExerciseToPlanForm({ exercisesPromise, dayId }: Props) {
                 </Command>
               </PopoverContent>
             </Popover>
+            <p className="text-sm text-neutral-700">
+              exercise not found? <Link href="/exercises/new">Add It!</Link>
+            </p>
             {state.issues?.['exerciseId'] && (
               <p className="text-sm font-semibold text-rose-600">
                 {state.issues['exerciseId'][0]}

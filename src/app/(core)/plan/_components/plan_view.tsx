@@ -12,10 +12,10 @@ import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { WorkoutPlanWithRelations } from '@/types';
 import { revalidatePath } from 'next/cache';
-import { newWorkoutPlanAction } from './_actions';
 import { daysOfWeek } from '@/lib/data';
 import Link from 'next/link';
-import { ExerciseArticle } from './_components/exercise_article';
+import { ExerciseArticle } from './exercise_article';
+import { newWorkoutPlanAction } from '../_actions';
 
 type Props = {
   workoutPlanPromise: Promise<WorkoutPlanWithRelations | undefined>;
