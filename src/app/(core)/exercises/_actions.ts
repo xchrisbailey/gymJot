@@ -44,7 +44,7 @@ export async function generateExercise(prevState: ActionState, formData: FormDat
 
   try {
     const { object } = await generateObject({
-      model: openai('gpt-4o-mini'),
+      model: openai('gpt-3.5-turbo'),
       schema: generateExerciseSchema,
       prompt: prompt,
     });

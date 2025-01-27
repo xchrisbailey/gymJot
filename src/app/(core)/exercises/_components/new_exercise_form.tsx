@@ -26,7 +26,7 @@ export default function NewExerciseForm() {
         </Label>
       </div>
 
-      {state.error && state.error}
+      <p className="text-sm font-semibold text-rose-600">{state.error && state.error}</p>
 
       <Button type="submit" disabled={pending}>
         {pending ? 'Generating...' : 'Generate'}
