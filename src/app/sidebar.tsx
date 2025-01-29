@@ -136,7 +136,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     <DropdownMenuItem>
-                      <Link href="#profile" className="flex">
+                      <Link href="/profile" className="flex">
                         <User className="mr-2 h-4 w-4" />
                         Profile
                       </Link>
