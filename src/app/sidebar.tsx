@@ -145,7 +145,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
                       <Form action={signOutAction} className="m-0 p-0">
                         <button
                           // variant="link"
-                          className="m-0 flex items-center border-none p-0 outline-none"
+                          className="m-0 flex items-center border-none p-0 outline-hidden"
                         >
                           <LogOut className="mr-2 h-4 w-4" />
                           Sign Out
