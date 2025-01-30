@@ -34,8 +34,8 @@ export default async function ProfilePage() {
   return (
     <>
       <h1>{session.user.name}</h1>
-      <div className="grid grid-cols-2 gap-5">
-        <article>
+      <div className="grid grid-cols-4 gap-5">
+        <article className="col-span-1 rounded border-2 border-neutral-200/80 bg-neutral-100/80 p-2">
           <h3 className="mb-2 text-neutral-700">Todays Schedule</h3>
           <Suspense fallback={<p>Loading...</p>}>
             <DayPlan todaysPlanPromise={todaysPlanPromise} />
