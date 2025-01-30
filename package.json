@@ -29,16 +29,16 @@
     "@radix-ui/react-separator": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.1",
     "@radix-ui/react-tooltip": "^1.1.6",
-    "ai": "^4.1.10",
+    "ai": "^4.1.11",
     "babel-plugin-react-compiler": "^19.0.0-beta-e552027-20250112",
-    "better-auth": "^1.1.14",
+    "better-auth": "^1.1.15",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
-    "drizzle-orm": "^0.39.0",
-    "drizzle-seed": "^0.3.0",
+    "drizzle-orm": "^0.39.1",
+    "drizzle-seed": "^0.3.1",
     "lucide-react": "^0.474.0",
     "next": "15.2.0-canary.18",
     "react": "19.0.0",
@@ -57,7 +57,7 @@
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
     "autoprefixer": "^10.4.20",
-    "drizzle-kit": "^0.30.3",
+    "drizzle-kit": "^0.30.4",
     "eslint": "^9.19.0",
     "eslint-config-next": "15.2.0-canary.18",
     "postcss": "^8.5.1",
@@ -76,5 +76,6 @@
       "@types/react": "19.0.7",
       "@types/react-dom": "19.0.3"
     }
-  }
+  },
+  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
 }
