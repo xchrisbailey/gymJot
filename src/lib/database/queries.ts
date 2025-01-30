@@ -9,10 +9,19 @@ import { db } from '.';
 import { day, dayExercise, logExercise, workoutPlan } from './schema';
 import { and, eq } from 'drizzle-orm';
 
+/**
+ * Retrieves all exercises from the database.
+ * @returns {Promise<Exercise[]>} A promise that resolves to an array of exercises
+ */
 export async function getAllExercises(): Promise<Exercise[]> {
   return await db.query.exercise.findMany();
 }
 
+/**
+ * Retrieves a workout plan for a specific user with all related data (days, exercises).
+ * @param {string} userId - The ID of the user
+ * @returns {Promise<WorkoutPlanWithRelations | undefined>} A promise that resolves to the workout plan or undefined if not found
+ */
 export async function getWorkoutPlan(
   userId: string
 ): Promise<WorkoutPlanWithRelations | undefined> {
@@ -32,6 +41,12 @@ export async function getWorkoutPlan(
   });
 }
 
+/**
+ * Retrieves a specific day from a user's workout plan.
+ * @param {'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'} day - The name of the day
+ * @param {string} userId - The ID of the user
+ * @returns {Promise<DayWithRelations | undefined>} A promise that resolves to the day data or undefined if not found
+ */
 export async function getWorkoutPlanDay(
   day: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday',
   userId: string
@@ -39,6 +54,12 @@ export async function getWorkoutPlanDay(
   return (await getWorkoutPlan(userId))?.days.find((d) => d.name === day);
 }
 
+/**
+ * Retrieves all exercises planned for a specific day for a user.
+ * @param {'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'} dayName - The name of the day
+ * @param {string} userId - The ID of the user
+ * @returns {Promise<DayExerciseWithRelations[] | undefined>} A promise that resolves to an array of exercises or undefined if not found
+ */
 export async function getPlanByDay(
   dayName:
     | 'monday'
@@ -63,6 +84,12 @@ export async function getPlanByDay(
   });
 }
 
+/**
+ * Retrieves all logged exercises for a specific date and user.
+ * @param {string} userId - The ID of the user
+ * @param {string} date - The date to retrieve logs for
+ * @returns {Promise<LogExerciseWithRelations[] | undefined>} A promise that resolves to an array of logged exercises or undefined if none found
+ */
 export async function getLoggedExercisesByDate(
   userId: string,
   date: string
@@ -75,6 +102,11 @@ export async function getLoggedExercisesByDate(
   });
 }
 
+/**
+ * Retrieves all dates for which a user has logged exercises.
+ * @param {string} userId - The ID of the user
+ * @returns {Promise<string[] | undefined>} A promise that resolves to an array of dates or undefined if none found
+ */
 export async function getAllAvaiableLoggedDates(
   userId: string
 ): Promise<string[] | undefined> {
