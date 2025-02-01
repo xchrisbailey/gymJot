@@ -1,5 +1,6 @@
 'use client';
 
+import { addExerciseToPlanAction } from '../_actions';
 import { Button } from '@/components/ui/button';
 import {
   Command,
@@ -16,9 +17,8 @@ import { cn } from '@/lib/utils';
 import { ActionState, Exercise } from '@/types';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import Form from 'next/form';
-import { use, useActionState, useState } from 'react';
-import { addExerciseToPlanAction } from '../_actions';
 import Link from 'next/link';
+import { use, useActionState, useState } from 'react';
 
 type Props = {
   exercisesPromise: Promise<Exercise[] | undefined>;

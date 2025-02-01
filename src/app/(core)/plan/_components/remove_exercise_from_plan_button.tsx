@@ -1,8 +1,8 @@
 'use client';
 
+import { removeExerciseFromPlanAction } from '../_actions';
 import { Button } from '@/components/ui/button';
 import { Trash2 } from 'lucide-react';
-import { removeExerciseFromPlanAction } from '../_actions';
 
 type Props = {
   dayExerciseId: string;

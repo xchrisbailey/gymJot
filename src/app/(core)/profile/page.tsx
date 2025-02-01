@@ -1,9 +1,9 @@
+import { DayPlan } from './_components/day_plan';
 import { auth } from '@/lib/auth';
+import { getPlanByDay } from '@/lib/database/queries';
+import { format } from 'date-fns';
 import { headers } from 'next/headers';
 import { unauthorized } from 'next/navigation';
-import { format } from 'date-fns';
-import { getPlanByDay } from '@/lib/database/queries';
-import { DayPlan } from './_components/day_plan';
 import { Suspense } from 'react';
 
 export default async function ProfilePage() {

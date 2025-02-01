@@ -1,6 +1,6 @@
+import { RemoveExerciseFromDayPlanButton } from './remove_exercise_from_plan_button';
 import { Badge } from '@/components/ui/badge';
 import { DayExerciseWithRelations } from '@/types';
-import { RemoveExerciseFromDayPlanButton } from './remove_exercise_from_plan_button';
 
 type Props = {
   dayExercise: DayExerciseWithRelations;

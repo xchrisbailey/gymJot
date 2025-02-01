@@ -1,7 +1,5 @@
 'use client';
 
-import { use, useState } from 'react';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -11,6 +9,7 @@ import {
   CardContent,
   CardFooter,
 } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -20,6 +19,7 @@ import {
 } from '@/components/ui/select';
 import { exerciseCategories } from '@/lib/data';
 import { Exercise } from '@/types';
+import { use, useState } from 'react';
 
 export function ExerciseList({
   exercisesPromise,

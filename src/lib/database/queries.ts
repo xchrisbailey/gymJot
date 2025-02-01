@@ -1,3 +1,5 @@
+import { db } from '.';
+import { day, dayExercise, logExercise, workoutPlan } from './schema';
 import {
   DayExerciseWithRelations,
   DayWithRelations,
@@ -5,8 +7,6 @@ import {
   LogExerciseWithRelations,
   WorkoutPlanWithRelations,
 } from '@/types';
-import { db } from '.';
-import { day, dayExercise, logExercise, workoutPlan } from './schema';
 import { and, eq } from 'drizzle-orm';
 
 /**

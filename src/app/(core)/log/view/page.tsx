@@ -1,3 +1,4 @@
+import { DailyLogContent } from '../_components/log-view';
 import { auth } from '@/lib/auth';
 import {
   getAllAvaiableLoggedDates,
@@ -6,7 +7,6 @@ import {
 import { headers } from 'next/headers';
 import { unauthorized } from 'next/navigation';
 import { Suspense } from 'react';
-import { DailyLogContent } from '../_components/log-view';
 
 type SearchParams = Promise<{ date: string | undefined }>;
 

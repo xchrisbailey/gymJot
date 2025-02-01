@@ -1,3 +1,21 @@
+import { signOutAction } from './(auth)/_actions';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Separator } from '@/components/ui/separator';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from '@/components/ui/sidebar';
+import { auth } from '@/lib/auth';
 import {
   ChevronDown,
   CreditCard,
@@ -11,29 +29,10 @@ import {
   User,
   UserPlus,
 } from 'lucide-react';
-import * as React from 'react';
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from '@/components/ui/sidebar';
 import Form from 'next/form';
-import Link from 'next/link';
-import { signOutAction } from './(auth)/_actions';
-import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
-import { Separator } from '@/components/ui/separator';
+import Link from 'next/link';
+import * as React from 'react';
 
 export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const session = await auth.api.getSession({

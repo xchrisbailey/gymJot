@@ -1,21 +1,21 @@
 'use client';
 
-import { use } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { newWorkoutPlanAction } from '../_actions';
+import { ExerciseArticle } from './exercise_article';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { daysOfWeek } from '@/lib/data';
 import { WorkoutPlanWithRelations } from '@/types';
 import { revalidatePath } from 'next/cache';
-import { daysOfWeek } from '@/lib/data';
 import Link from 'next/link';
-import { ExerciseArticle } from './exercise_article';
-import { newWorkoutPlanAction } from '../_actions';
+import { use } from 'react';
 
 type Props = {
   workoutPlanPromise: Promise<WorkoutPlanWithRelations | undefined>;

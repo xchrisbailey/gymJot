@@ -1,9 +1,9 @@
+import LogFormList from './_components/log-form';
+import { Day } from './_utils';
 import { auth } from '@/lib/auth';
 import { getLoggedExercisesByDate, getPlanByDay } from '@/lib/database/queries';
 import { headers } from 'next/headers';
 import { unauthorized } from 'next/navigation';
-import LogFormList from './_components/log-form';
-import { Day } from './_utils';
 import { Suspense } from 'react';
 
 export default async function LogPage() {

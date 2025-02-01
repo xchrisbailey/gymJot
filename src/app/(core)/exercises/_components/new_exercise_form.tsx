@@ -1,11 +1,11 @@
 'use client';
 
+import { generateExercise } from '../_actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ActionState } from '@/types';
 import { useActionState, useRef } from 'react';
-import { generateExercise } from '../_actions';
 
 export default function NewExerciseForm() {
   const [state, formAction, pending] = useActionState<ActionState, FormData>(

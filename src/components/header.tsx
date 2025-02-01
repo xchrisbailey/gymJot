@@ -1,10 +1,10 @@
+import { Button } from './ui/button';
 import { signOutAction } from '@/app/(auth)/_actions';
 import { auth } from '@/lib/auth';
 import { LogInIcon, LogOutIcon } from 'lucide-react';
 import Form from 'next/form';
 import { headers } from 'next/headers';
 import Link from 'next/link';
-import { Button } from './ui/button';
 
 export async function Header() {
   const session = await auth.api.getSession({

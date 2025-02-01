@@ -1,11 +1,11 @@
+import { BackButton } from '../_components/back_button';
+import { ExerciseArticle } from '../_components/exercise_article';
+import ExerciseToPlanForm from '../_components/exercise_to_plan_form';
+import { Separator } from '@/components/ui/separator';
 import { auth } from '@/lib/auth';
 import { getAllExercises, getWorkoutPlanDay } from '@/lib/database/queries';
 import { headers } from 'next/headers';
 import { redirect, unauthorized } from 'next/navigation';
-import { ExerciseArticle } from '../_components/exercise_article';
-import ExerciseToPlanForm from '../_components/exercise_to_plan_form';
-import { Separator } from '@/components/ui/separator';
-import { BackButton } from '../_components/back_button';
 
 type Props = {
   searchParams: Promise<{
