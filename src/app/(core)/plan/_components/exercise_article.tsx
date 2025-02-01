@@ -12,11 +12,11 @@ export function ExerciseArticle({ dayExercise }: Props) {
       <article className="py-4 transition-all duration-300 ease-in-out group-hover:pr-16">
         <div className="py-2">
           <h3 className="font-semibold">{dayExercise.exercise.name}</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             {dayExercise.sets} sets of {dayExercise.reps} reps
           </p>
           {dayExercise.exercise.description && (
-            <p className="mt-1 text-sm text-muted-foreground">
+            <p className="text-muted-foreground mt-1 text-sm">
               {dayExercise.exercise.description}
             </p>
           )}
@@ -43,7 +43,7 @@ export function ExerciseArticle({ dayExercise }: Props) {
           )}
         </div>
       </article>
-      <div className="absolute right-0 top-5 h-full w-12 translate-x-full transition-transform duration-300 ease-in-out group-hover:translate-x-0">
+      <div className="absolute top-5 right-0 h-full w-12 translate-x-full transition-transform duration-300 ease-in-out group-hover:translate-x-0">
         <RemoveExerciseFromDayPlanButton dayExerciseId={dayExercise.id} />
       </div>
     </div>

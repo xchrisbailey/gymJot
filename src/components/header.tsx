@@ -13,7 +13,7 @@ export async function Header() {
 
   return (
     <header className="flex h-[60px] items-center justify-between bg-neutral-900 px-5">
-      <div className="font-mono text-2xl font-semibold lowercase tracking-wide text-pink-200">
+      <div className="font-mono text-2xl font-semibold tracking-wide text-pink-200 lowercase">
         gym<em>Jot</em>
       </div>
       <div>

@@ -204,7 +204,7 @@
   }
 
   tr {
-    @apply m-0 border-t p-0 even:bg-muted;
+    @apply even:bg-muted m-0 border-t p-0;
   }
 
   th {
@@ -216,10 +216,10 @@
   }
 
   code {
-    @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+    @apply bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
   }
 
   small {
-    @apply text-sm font-medium leading-none;
+    @apply text-sm leading-none font-medium;
   }
 }

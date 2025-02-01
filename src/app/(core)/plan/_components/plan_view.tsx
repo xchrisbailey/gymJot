@@ -74,7 +74,7 @@ export function WorkoutPlanView({ workoutPlanPromise }: Props) {
                     ))
                   ) : (
                     <div>
-                      <p className="mb-2 text-muted-foreground">
+                      <p className="text-muted-foreground mb-2">
                         No exercises planned for this day.
                       </p>
                     </div>
