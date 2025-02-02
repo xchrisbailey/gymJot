@@ -7,7 +7,7 @@ import {
   LogExerciseWithRelations,
   WorkoutPlanWithRelations,
 } from '@/types';
-import { and, eq } from 'drizzle-orm';
+import { and, eq, inArray } from 'drizzle-orm';
 
 /**
  * Retrieves all exercises from the database.
@@ -115,4 +115,25 @@ export async function getAllAvaiableLoggedDates(
     .from(logExercise)
     .where(eq(logExercise.userId, userId));
   return Object.values(dates).map((d) => d.date);
+}
+
+/**
+ * Retrieves logged exercises for a specific user within a given date range
+ * @param userId - The unique identifier of the user
+ * @param dates - Array of dates to query exercises for (in string format)
+ * @returns Promise containing an array of logged exercises with their relations, or undefined if none found
+ * @throws {Error} If the database query fails
+ * @example
+ * const exercises = await getLoggedExercisesByDateRange('user123', ['2024-01-01', '2024-01-02']);
+ */
+export async function getLoggedExercisesByDateRange(
+  userId: string,
+  dates: string[]
+): Promise<LogExerciseWithRelations[] | undefined> {
+  return await db.query.logExercise.findMany({
+    where: and(eq(logExercise.userId, userId), inArray(logExercise.date, dates)),
+    with: {
+      exercise: true,
+    },
+  });
 }
