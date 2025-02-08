@@ -71,7 +71,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
             <SidebarMenuItem>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <SidebarMenuButton>
+                  <SidebarMenuButton className="cursor-pointer">
                     <FileText className="mr-2 h-4 w-4" />
                     Log
                     <ChevronDown className="ml-auto h-4 w-4" />
@@ -96,7 +96,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
             <SidebarMenuItem>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <SidebarMenuButton>
+                  <SidebarMenuButton className="cursor-pointer">
                     <Dumbbell className="mr-2 h-4 w-4" />
                     Exercises
                     <ChevronDown className="ml-auto h-4 w-4" />
@@ -127,7 +127,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
               <SidebarMenuItem>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <SidebarMenuButton>
+                    <SidebarMenuButton className="cursor-pointer">
                       <User className="mr-2 h-4 w-4" />
                       {session.user.name}
                       <ChevronDown className="ml-auto h-4 w-4" />
